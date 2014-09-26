@@ -1,0 +1,31 @@
+<h1>Contact US</h1>
+<script src="<?php echo $this->url->get("ckeditor/ckeditor.js"); ?>" ></script>
+<div class='row'>
+    <div class='col-md-6'>
+        <?php echo $this->getContent(); ?>
+        <form method="post">
+
+            <!-- First Name !-->
+            <?php echo $form->renderDecorated('name'); ?>
+
+            <!-- Email !-->
+            <?php echo $form->renderDecorated('email'); ?>
+
+            <!-- Section !-->
+            <?php echo $form->renderDecorated('section'); ?>
+
+            <!-- Password !-->
+            <?php echo $form->renderDecorated('message'); ?>
+
+            <br/>
+            <!-- Submit !-->
+            <?php echo $form->renderDecorated('submit'); ?>
+
+        </form>
+
+    </div>
+    <div class='col-md-6'>
+
+    </div>
+</div>
+

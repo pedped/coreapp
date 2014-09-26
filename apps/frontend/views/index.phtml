@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400' rel='stylesheet' type='text/css'>
+        <?php $this->assets->outputCss('header') ?>
+        <title></title>
+    </head>
+    <!-- Load The Header !-->
+    <?php $this->partial("layouts/header") ?>
+    <body>
+        <div class="container-fluid">
+            <div class="col-md-12" style="text-align: left;">
+                <?php echo $this->getContent() ?>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <?php $this->assets->outputJs('footer') ?>
+    </footer>
+    
+    <!-- Track Actions !-->
+    <?php 
+    
+        
+    
+    ?>
+</html>
