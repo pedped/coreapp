@@ -1,9 +1,9 @@
 <?php
 
-namespace Simplemod\Frontend\Controllers;
+namespace Simpledom\Frontend\Controllers;
 
 use Contact;
-use Simplemod\Core\ContactForm;
+use Simpledom\Core\ContactForm;
 
 class ContactController extends ControllerBase {
 

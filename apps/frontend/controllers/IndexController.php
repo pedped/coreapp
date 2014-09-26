@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Frontend\Controllers;
+namespace Simpledom\Frontend\Controllers;
 
 class IndexController extends ControllerBase
 {

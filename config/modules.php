@@ -3,11 +3,11 @@
 $application->registerModules(
         array(
             'frontend' => array(
-                'className' => 'Simplemod\Frontend\Module',
+                'className' => 'Simpledom\Frontend\Module',
                 'path' => '../apps/frontend/Module.php',
             ),
             'admin' => array(
-                'className' => 'Simplemod\Admin\Module',
+                'className' => 'Simpledom\Admin\Module',
                 'path' => '../apps/admin/Module.php',
             )
         )

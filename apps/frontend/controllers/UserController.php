@@ -1,13 +1,13 @@
 <?php
 
-namespace Simplemod\Frontend\Controllers;
+namespace Simpledom\Frontend\Controllers;
 
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use Simplemod\Core\ForgetPasswordForm;
-use Simplemod\Core\LoginForm;
-use Simplemod\Core\ProfileEditForm;
-use Simplemod\Core\RegisterForm;
+use Simpledom\Core\ForgetPasswordForm;
+use Simpledom\Core\LoginForm;
+use Simpledom\Core\ProfileEditForm;
+use Simpledom\Core\RegisterForm;
 use User;
 
 class UserController extends ControllerBase {

@@ -1,6 +1,6 @@
 <?php
 
-use Simplemod\Core\AtaModel;
+use Simpledom\Core\AtaModel;
 
 class Logins extends AtaModel {
 

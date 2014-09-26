@@ -1,7 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
-use Simplemod\Core\AtaModel;
+use Simpledom\Core\AtaModel;
 
 class Contact extends AtaModel {
 

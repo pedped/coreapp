@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Admin\Controllers;
+namespace Simpledom\Admin\Controllers;
 
 use Contact;
 use Phalcon\Mvc\Controller;
@@ -27,19 +27,19 @@ class ControllerBase extends Controller {
         // CSS in the header
         $this->assets
                 ->collection('header')
-                ->setPrefix('http://localhost/simplemod/')
+                ->setPrefix('http://localhost/simpledom/')
                 ->addCss('css/bt3/bootstrap.css', true)
                 ->addCss('css/app/main.css', true);
 
         //Javascripts in the footer
         $this->assets
                 ->collection('footer')
-                ->setPrefix('http://localhost/simplemod/')
+                ->setPrefix('http://localhost/simpledom/')
                 ->addJs('js/jquery/jquery.min.js', true)
                 ->addJs('bootstrap/bootstrap.js', true);
 
 
-        $this->view->pfurl = "http://localhost/simplemod/";
+        $this->view->pfurl = "http://localhost/simpledom/";
 
         // set default page title
         $this->setTitle("Dashboard");

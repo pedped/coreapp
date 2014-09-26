@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Core;
+namespace Simpledom\Core;
 
 use EditorElement;
 use Phalcon\Forms\Element\Select;

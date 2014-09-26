@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Core;
+namespace Simpledom\Core;
 
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Resultset\Simple as Resultset;

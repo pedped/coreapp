@@ -5,7 +5,7 @@ define("USERLEVEL_ADMIN", 8);
 define("USERLEVEL_USER", 1);
 
 use Phalcon\Mvc\Controller;
-use Simplemod\Core\AtaModel;
+use Simpledom\Core\AtaModel;
 
 class User extends AtaModel {
 

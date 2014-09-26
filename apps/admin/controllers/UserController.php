@@ -1,11 +1,11 @@
 <?php
 
-namespace Simplemod\Admin\Controllers;
+namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use Simplemod\Core\ViewUserForm;
+use Simpledom\Core\ViewUserForm;
 use User;
 
 class UserController extends ControllerBase {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Simplemod\Admin\Controllers;
+namespace Simpledom\Admin\Controllers;
 
-use Simplemod\Core\SiteInfoForm;
+use Simpledom\Core\SiteInfoForm;
 
 class SiteinfoController extends ControllerBase {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Simplemod\Admin\Controllers;
+namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
 use Contact;
-use Simplemod\Core\ContactReplyForm;
-use Simplemod\Core\SendBulkEmailForm;
+use Simpledom\Core\ContactReplyForm;
+use Simpledom\Core\SendBulkEmailForm;
 
 class ContactController extends ControllerBase {
 

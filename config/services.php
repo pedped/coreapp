@@ -21,7 +21,7 @@ $di['router'] = function () {
     $router = new Router();
 
     $router->setDefaultModule("frontend");
-    //$router->setDefaultNamespace("Simplemod\Frontend\Controllers");
+    //$router->setDefaultNamespace("Simpledom\Frontend\Controllers");
 
 
     $router->add('/', array(
@@ -71,7 +71,7 @@ $di['router'] = function () {
  */
 $di['url'] = function () {
     $url = new UrlResolver();
-    $url->setBaseUri('/simplemod/');
+    $url->setBaseUri('/simpledom/');
 
     return $url;
 };
@@ -97,11 +97,11 @@ $di['session'] = function () {
 //    $application->registerModules(
 //            array(
 //                'frontend' => array(
-//                    'className' => 'Simplemod\Frontend\Module',
+//                    'className' => 'Simpledom\Frontend\Module',
 //                    'path' => '../apps/frontend/Module.php',
 //                ),
 //                'admin' => array(
-//                    'className' => 'Simplemod\Admin\Module',
+//                    'className' => 'Simpledom\Admin\Module',
 //                    'path' => '../apps/admin/Module.php',
 //                )
 //            )

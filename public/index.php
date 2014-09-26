@@ -35,9 +35,9 @@ try {
     //Register some namespaces
     $loader->registerNamespaces(
             array(
-                "Simplemod\Core" => dirname(__DIR__) . "/apps/frontend/core/",
-                "Simplemod\Core" => dirname(__DIR__) . "/apps/frontend/core/form/",
-            //"Simplemod\Core" => dirname(__DIR__) . "/apps/frontend/core/model/",
+                "Simpledom\Core" => dirname(__DIR__) . "/apps/frontend/core/",
+                "Simpledom\Core" => dirname(__DIR__) . "/apps/frontend/core/form/",
+            //"Simpledom\Core" => dirname(__DIR__) . "/apps/frontend/core/model/",
             )
     );
 

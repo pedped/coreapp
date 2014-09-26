@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Core;
+namespace Simpledom\Core;
 
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Forms\Element\TextArea;

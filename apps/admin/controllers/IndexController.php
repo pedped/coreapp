@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Admin\Controllers;
+namespace Simpledom\Admin\Controllers;
 
 use Contact;
 use User;

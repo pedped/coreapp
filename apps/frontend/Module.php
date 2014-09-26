@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Frontend;
+namespace Simpledom\Frontend;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\Dispatcher;
@@ -20,9 +20,9 @@ class Module implements ModuleDefinitionInterface {
 
         $loader->registerNamespaces(
                 array(
-                    'Simplemod\Frontend\Controllers' => __DIR__ . '/controllers/',
-                    'Simplemod\Models' => dirname(__DIR__) . '/admin/models/',
-                    'Simplemod\Core' => dirname(__DIR__) . '/frontend/core/',
+                    'Simpledom\Frontend\Controllers' => __DIR__ . '/controllers/',
+                    'Simpledom\Models' => dirname(__DIR__) . '/admin/models/',
+                    'Simpledom\Core' => dirname(__DIR__) . '/frontend/core/',
                 )
         );
 
@@ -41,7 +41,7 @@ class Module implements ModuleDefinitionInterface {
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("Simplemod\Frontend\Controllers");
+            $dispatcher->setDefaultNamespace("Simpledom\Frontend\Controllers");
             return $dispatcher;
         });
 
@@ -116,19 +116,19 @@ class Module implements ModuleDefinitionInterface {
 
         $di->set('url', function() {
             $url = new Url();
-            $url->setBaseUri('/simplemod/');
+            $url->setBaseUri('/simpledom/');
             return $url;
         });
 
 
-        $di['router']->setDefaultNamespace("Simplemod\Frontend\Controllers");
+        $di['router']->setDefaultNamespace("Simpledom\Frontend\Controllers");
     }
 
 }
 
 
 
-//namespace Simplemod\Frontend;
+//namespace Simpledom\Frontend;
 //
 //use Phalcon\Loader;
 //use Phalcon\Mvc\View;
@@ -145,8 +145,8 @@ class Module implements ModuleDefinitionInterface {
 //        $loader = new Loader();
 //
 //        $loader->registerNamespaces(array(
-//            'Simplemod\Frontend\Controllers' => __DIR__ . '/controllers/',
-//            'Simplemod\Frontend\Models' => __DIR__ . '/models/',
+//            'Simpledom\Frontend\Controllers' => __DIR__ . '/controllers/',
+//            'Simpledom\Frontend\Models' => __DIR__ . '/models/',
 //        ));
 //        
 //        $loader->registerDirs(array(

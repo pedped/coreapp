@@ -1,6 +1,6 @@
 <?php
 
-namespace Simplemod\Admin;
+namespace Simpledom\Admin;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\Dispatcher;
@@ -20,10 +20,10 @@ class Module implements ModuleDefinitionInterface {
 
         $loader->registerNamespaces(
                 array(
-                    'Simplemod\Admin\Controllers' => __DIR__ . '/controllers/',
-                    'Simplemod\Core' => dirname(__DIR__) . '/frontend/core/',
-                    'Simplemod\Models' => dirname(__DIR__) . '/frontend/models/',
-                    'Simplemod\Admin\Models' => __DIR__ . '/models/',
+                    'Simpledom\Admin\Controllers' => __DIR__ . '/controllers/',
+                    'Simpledom\Core' => dirname(__DIR__) . '/frontend/core/',
+                    'Simpledom\Models' => dirname(__DIR__) . '/frontend/models/',
+                    'Simpledom\Admin\Models' => __DIR__ . '/models/',
                 )
         );
 
@@ -42,7 +42,7 @@ class Module implements ModuleDefinitionInterface {
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("Simplemod\Admin\Controllers");
+            $dispatcher->setDefaultNamespace("Simpledom\Admin\Controllers");
             return $dispatcher;
         });
 
@@ -93,12 +93,12 @@ class Module implements ModuleDefinitionInterface {
 
         $di->set('url', function() {
             $url = new Url();
-            $url->setBaseUri('/simplemod/admin/');
+            $url->setBaseUri('/simpledom/admin/');
             return $url;
         });
 
 
-        //$di['router']->setDefaultNamespace("Simplemod\Admin\Controllers");
+        //$di['router']->setDefaultNamespace("Simpledom\Admin\Controllers");
     }
 
 }
