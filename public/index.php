@@ -51,7 +51,6 @@ try {
             )
     );
 
-
     $eventsManager = new \Phalcon\Events\Manager();
 
     //Listen all the loader events
@@ -72,6 +71,9 @@ try {
     require __DIR__ . '/../config/modules.php';
 
     echo $application->handle()->getContent();
+
+
+
 
 
     //Get the generated profiles from the profiler

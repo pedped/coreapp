@@ -9,6 +9,10 @@ $application->registerModules(
             'admin' => array(
                 'className' => 'Simpledom\Admin\Module',
                 'path' => '../apps/admin/Module.php',
+            ),
+            'api' => array(
+                'className' => 'Simpledom\Api\Module',
+                'path' => '../apps/api/Module.php',
             )
         )
 );

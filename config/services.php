@@ -8,6 +8,7 @@ use Phalcon\Mvc\Application;
 use Phalcon\Mvc\Router;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
@@ -29,14 +30,14 @@ $di['router'] = function () {
         'action' => "index",
         'params' => "index"
     ));
-    
-    
+
+
     $router->add('/admin', array(
         'module' => "admin",
         'action' => "index",
         'params' => "index"
     ));
-    
+
     $router->add('/admin/', array(
         'module' => "admin",
         'action' => "index",
@@ -57,6 +58,45 @@ $di['router'] = function () {
 
     $router->add('/admin/:controller/:action/:params', array(
         'module' => "admin",
+        'controller' => 1,
+        'action' => 2,
+        'params' => 3
+    ));
+
+    // API REQUESTS
+    $router->add('/', array(
+        'module' => "frontend",
+        'action' => "index",
+        'params' => "index"
+    ));
+
+
+    $router->add('/api', array(
+        'module' => "api",
+        'action' => "index",
+        'params' => "index"
+    ));
+
+    $router->add('/api/', array(
+        'module' => "api",
+        'action' => "index",
+        'params' => "index"
+    ));
+
+    $router->add('/api/:controller', array(
+        'module' => "api",
+        'controller' => 1,
+        'action' => "index"
+    ));
+
+    $router->add('/api/:controller/:action/', array(
+        'module' => "api",
+        'controller' => 1,
+        'action' => 2
+    ));
+
+    $router->add('/api/:controller/:action/:params', array(
+        'module' => "api",
         'controller' => 1,
         'action' => 2,
         'params' => 3
