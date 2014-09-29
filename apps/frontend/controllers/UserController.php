@@ -9,6 +9,7 @@ use Simpledom\Core\LoginForm;
 use Simpledom\Core\ProfileEditForm;
 use Simpledom\Core\RegisterForm;
 use User;
+use Userlog;
 
 class UserController extends ControllerBase {
 
@@ -83,6 +84,9 @@ class UserController extends ControllerBase {
 
                     // set login for the user
                     $user->trackLogin($this->request->getUserAgent(), $_SERVER["REMOTE_ADDR"]);
+
+                    // we need to log this action for the user
+                    Userlog::byUserID($user->userid)->setAction("Login To System")->Create();
 
                     // go to welcome page
                     return $this->dispatcher->forward(array(

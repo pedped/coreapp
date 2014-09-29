@@ -53,4 +53,8 @@ class Logins extends AtaModel {
         $this->date = time();
     }
 
+    public function getPublicResponse() {
+        
+    }
+
 }

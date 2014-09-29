@@ -117,4 +117,8 @@ class EmailTemplate extends AtaModel {
         var_dump($this->parameters);
     }
 
+    public function getPublicResponse() {
+        
+    }
+
 }

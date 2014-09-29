@@ -213,4 +213,12 @@ class User extends AtaModel {
         return $this->level == USERLEVEL_SUPERADMIN;
     }
 
+    public function getPublicResponse() {
+        $result = new stdClass();
+        $result->userid = $this->userid;
+        $result->firstname = $this->fname;
+        $result->lastname = $this->lname;
+        return $result;
+    }
+
 }

@@ -89,4 +89,12 @@ AND MONTH(track.time) >= MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY day(tra
 AND MONTH(track.time) >= MONTH(CURRENT_DATE - INTERVAL 1 DAY) AND DAY(track.time) >= DAY(CURRENT_DATE - INTERVAL 1 DAY)");
     }
 
+    public function getPublicResponse() {
+        $item = new stdClass();
+        $item->id = $this->id;
+        $item->agent = $this->agent;
+        $item->date = $this->date;
+        return $item;
+    }
+
 }

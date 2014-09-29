@@ -93,4 +93,8 @@ class Contact extends AtaModel {
         return parent::findFirst($parameters);
     }
 
+    public function getPublicResponse() {
+        
+    }
+
 }

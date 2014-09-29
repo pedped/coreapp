@@ -2,9 +2,10 @@
 
 namespace Simpledom\Api\Controllers;
 
+use Track;
 use User;
 
-class UserController extends ControllerBase {
+class TrackController extends ControllerBase {
 
     public function getAction($id) {
         return $this->getResponse(User::findFirst($id)->getPublicResponse());
@@ -12,7 +13,7 @@ class UserController extends ControllerBase {
 
     public function listAction() {
         $results = array();
-        foreach (User::find() as $value) {
+        foreach (Track::find() as $value) {
             $results[] = $value->getPublicResponse();
         }
         return $this->getResponse($results);

@@ -5,7 +5,9 @@ namespace Simpledom\Core;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
 
-class AtaModel extends Model {
+abstract class AtaModel extends Model {
+
+    abstract function getPublicResponse();
 
     /**
      * Create Custom Query
