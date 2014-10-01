@@ -74,6 +74,7 @@ class User extends AtaModel {
      * @var string
      */
     public $token;
+
     /**
      *
      * @var string
@@ -173,6 +174,7 @@ class User extends AtaModel {
         $controller->session->set("lname", $this->lname);
         $controller->session->set("imagelink", $this->imagelink);
         $controller->session->set("email", $this->email);
+        $controller->session->set("level", $this->level);
     }
 
     /**

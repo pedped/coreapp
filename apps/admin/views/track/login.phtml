@@ -16,6 +16,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-condensed mb-none ">
                         <tr>
+                            <th>User ID</th>
                             <th>Name</th>
                             <th>Date</th>
                             <th>Agent</th>
@@ -24,6 +25,7 @@
                         </tr>
                         <?php foreach ($users->items as $item) { ?>
                             <tr>
+                                <td><?php echo $item->userid; ?></td>
                                 <td><?php echo $item->getUser()->getFullName(); ?></td>
                                 <td><?php echo $item->getDate(); ?></td>
                                 <td><?php echo $item->agent; ?></td>
