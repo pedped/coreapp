@@ -3,6 +3,7 @@
 namespace Simpledom\Core;
 
 use EditorElement;
+use MapElement;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Forms\Element\Text;
@@ -47,16 +48,15 @@ class ContactForm extends AtaForm {
         // Section
         $reason = new Select("section", array(
             'support' => 'Support',
-            'sale' => 'Sale'
+            'sale' => 'Sale',
+            'reseller' => 'Resseler'
         ));
         $reason->setLabel("Section");
         $reason->setAttribute("class", "form-control");
         $this->add($reason);
 
 
-
-
-        // ٍEmail
+        // Message
         $message = new EditorElement("message");
         $message->setLabel("Message");
         $message->setAttribute("class", "form-control");
@@ -70,6 +70,16 @@ class ContactForm extends AtaForm {
         $message->setLanguage("en");
         $this->add($message);
 
+        // Map
+        $map = new MapElement("map");
+        $map->setLabel("Our Location");
+        $map->setLanguage("en");
+        $map->setMarkTitle("Findout Us");
+        $map->setMarkDescription("About Us");
+        $map->setLathitude(29.60);
+        $map->setLongtude(52.505);
+        $map->setZoom(12);
+        $this->add($map);
 
         // Submit Button
         $submit = new Submit("submit");

@@ -8,6 +8,16 @@ use Track;
 
 class ControllerBase extends Controller {
 
+    /**
+     * this function will get website settings
+     * @param type $title
+     * @return string
+     */
+    public function getSettings($title) {
+
+        return $title;
+    }
+
     public function initialize() {
         // CSS in the header
         $this->assets
