@@ -74,6 +74,11 @@ class User extends AtaModel {
      * @var string
      */
     public $token;
+    /**
+     *
+     * @var string
+     */
+    public $regtime;
 
     /**
      *
@@ -107,6 +112,7 @@ class User extends AtaModel {
         $this->verifycode = $this->generateRandomString(256);
         $this->resetcode = "0";
         $this->resetcodedate = "0";
+        $this->regtime = date(time());
     }
 
     public function beforeCreate() {
@@ -132,8 +138,12 @@ class User extends AtaModel {
      * @return boolean|User
      */
     public static function Login($email, $password) {
+
+        // TODO validate email
+
+
         $user = User::findFirst(array(
-                    "email" => $email
+                    "email = '$email'"
         ));
 
         if (isset($user->userid)) {
@@ -219,6 +229,16 @@ class User extends AtaModel {
         $result->firstname = $this->fname;
         $result->lastname = $this->lname;
         return $result;
+    }
+
+    /**
+     * get last month registration count
+     * @return User
+     */
+    public function getLastMonthRegistarChart() {
+
+        return $this->rawQuery("SELECT  YEAR(user.regtime) as year , MONTH(user.regtime) as month , day(user.regtime) as day , count(user.userid) as total FROM `user` WHERE YEAR(user.regtime) >= YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
+AND MONTH(user.regtime) >= MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY day(user.regtime)");
     }
 
 }

@@ -39,4 +39,26 @@ class Userlog extends AtaModel {
         return $this;
     }
 
+    /**
+     * Fetch the user who visited the page
+     * @return User
+     */
+    public function getUser() {
+        return User::findFirst($this->userid);
+    }
+
+    public function getDate() {
+        return date("Y-m-d H:i:s", $this->date);
+    }
+
+    /**
+     * Set Info
+     * @param type $title
+     * @return Userlog
+     */
+    public function setInfo($title) {
+      $this->info = $title;
+      return $this;
+    }
+
 }

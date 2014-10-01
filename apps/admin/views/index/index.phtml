@@ -32,7 +32,6 @@
                 <p class="panel-subtitle">Here you can see join count at each day to the site</p>
             </header>
             <div class="panel-body">
-
                 <!-- Morris: Line -->
                 <div class="chart chart-md" id="morrisLine"></div>
                 <script type="text/javascript">
@@ -40,20 +39,17 @@
                     Morris.Line({
                         element: 'morrisLine',
                         data: [
-                            {y: '2006', a: 100},
-                            {y: '2007', a: 75},
-                            {y: '2008', a: 50},
-                            {y: '2009', a: 75},
-                            {y: '2010', a: 50},
-                            {y: '2011', a: 75},
-                            {y: '2012', a: 100}
+<?php
+foreach ($registerChart as $visit) {
+    echo "{y: '$visit->year', m: '$visit->month', d: '$visit->day', b: $visit->total},";
+}
+?>
                         ],
-                        xkey: 'y',
-                        ykeys: ['a'],
-                        labels: ['User Register']
+                        xkey: 'd',
+                        ykeys: ['b'],
+                        labels: ['Visit Per Day']
                     });
                 </script>
-
             </div>
         </section>
     </div>

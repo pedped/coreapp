@@ -6,6 +6,7 @@ use AtaPaginator;
 use Contact;
 use Simpledom\Core\ContactReplyForm;
 use Simpledom\Core\SendBulkEmailForm;
+use User;
 
 class ContactController extends ControllerBase {
 
@@ -39,7 +40,7 @@ class ContactController extends ControllerBase {
         // load the users
         $contacts = Contact::find(
                         array(
-                            "reply" => "NULL",
+                            "reply IS NULL",
                             "order" => "date DESC"
         ));
 
@@ -63,7 +64,7 @@ class ContactController extends ControllerBase {
         // load the users
         $contacts = Contact::find(
                         array(
-                            "reply" => "IS NOT NULL",
+                            "reply IS NOT NULL",
                             "order" => "date DESC"
         ));
 
@@ -138,7 +139,7 @@ class ContactController extends ControllerBase {
             if ($fr->isValid($_POST)) {
                 // form is valid, we have to send email
                 // TODO send email
-                $users = \User::find();
+                $users = User::find();
                 
             } else {
                 // invalid

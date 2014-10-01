@@ -16,6 +16,8 @@ class IndexController extends ControllerBase {
         // load total contacts
         $this->view->totalUsers = User::count();
         $this->view->totalContacts = Contact::count();
+        $user = new User();
+        $this->view->registerChart = $user->getLastMonthRegistarChart();
     }
 
 }

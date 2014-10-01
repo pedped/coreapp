@@ -21,6 +21,24 @@
                     </li>
                     <li class="nav-parent">
                         <a>
+                            <i class="fa fa-archive" aria-hidden="true"></i>
+                            <span>Logs</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("userlogs/list"); ?>">
+                                    User Logs
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("systemlogs/list"); ?>">
+                                    System Logs
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>Contact</span>
                         </a>
@@ -67,16 +85,43 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo $this->url->get("malebox"); ?>">
+                        <a href="<?php echo $this->url->get("emailtemplate"); ?>">
                             <i class="fa fa-envelope-square" aria-hidden="true"></i>
                             <span>Email Template</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo $this->url->get("siteinfo"); ?>">
+                    <li class="nav-parent">
+                        <a>
                             <i class="fa fa-adjust" aria-hidden="true"></i>
                             <span>Site Info</span>
                         </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("siteinfo/info"); ?>">
+                                    <span>Website Information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("siteinfo/header"); ?>">
+                                    <span>Header</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("siteinfo/footer"); ?>">
+                                    <span>Footer</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("siteinfo/redirect"); ?>">
+                                    <span>Redirects</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("siteinfo/changestate"); ?>">
+                                    <span>Enable\Disable Site</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-parent">
                         <a>
@@ -94,9 +139,135 @@
                                     Search Users
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("user/loggedins"); ?>">
+                                    Logged In Users
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("user/most"); ?>">
+                                    Most Active
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span>Search</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("search/statistic"); ?>">
+                                    Statistics
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/list"); ?>">
+                                    List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/changestate"); ?>">
+                                    Enable\Disable Search
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-won" aria-hidden="true"></i>
+                            <span>Styles</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("search/statistic"); ?>">
+                                    Statistics
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/list"); ?>">
+                                    List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/changestate"); ?>">
+                                    Enable\Disable Search
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-columns" aria-hidden="true"></i>
+                            <span>Menus</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("search/statistic"); ?>">
+                                    Statistics
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/list"); ?>">
+                                    List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/changestate"); ?>">
+                                    Enable\Disable Search
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            <span>Pages</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("search/statistic"); ?>">
+                                    Statistics
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/list"); ?>">
+                                    List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/changestate"); ?>">
+                                    Enable\Disable Search
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            <span>Localization</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo $this->url->get("search/statistic"); ?>">
+                                    Add Language
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/list"); ?>">
+                                    List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url->get("search/changestate"); ?>">
+                                    Find Texts
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
+
             </nav>
 
             <!--            <hr class="separator" />
