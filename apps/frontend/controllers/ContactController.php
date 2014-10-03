@@ -2,10 +2,10 @@
 
 namespace Simpledom\Frontend\Controllers;
 
-use Contact;
+use BaseContact;
 use Simpledom\Core\ContactForm;
-use User;
-use Userlog;
+use BaseUser;
+use BaseUserLog;
 
 class ContactController extends ControllerBase {
 
@@ -17,7 +17,7 @@ class ContactController extends ControllerBase {
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // valid request
-                $contact = new Contact();
+                $contact = new BaseContact();
                 $contact->email = $this->request->getPost("email", "email");
                 $contact->message = $this->request->getPost("message", "string");
                 $contact->name = $this->request->getPost("name", "string");
@@ -30,7 +30,7 @@ class ContactController extends ControllerBase {
 
                     // check if the user logged in to the system, log home page visit
                     if ($this->session->has("userid")) {
-                        Userlog::byUserID($this->session->get("userid"))->setAction("Posted New Contact Message")->setInfo("contact id is " . $contact->id)->create();
+                        BaseUserLog::byUserID($this->session->get("userid"))->setAction("Posted New Contact Message")->setInfo("contact id is " . $contact->id)->create();
                     }
 
                     $contact->showSuccessMessages($this, "Your message has been sent successfully");
@@ -45,7 +45,7 @@ class ContactController extends ControllerBase {
             // check if user logged in to system, set name and email
             if ($this->session->has("userid")) {
                 $userid = $this->session->get("userid");
-                $user = User::findFirst($userid);
+                $user = BaseUser::findFirst($userid);
                 $fr->get("name")->setDefault($user->getFullName());
                 $fr->get("email")->setDefault($user->email);
             }

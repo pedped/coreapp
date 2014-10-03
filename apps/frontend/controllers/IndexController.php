@@ -2,7 +2,7 @@
 
 namespace Simpledom\Frontend\Controllers;
 
-use Userlog;
+use BaseUserLog;
 
 class IndexController extends ControllerBase {
 
@@ -10,7 +10,7 @@ class IndexController extends ControllerBase {
 
         // check if the user logged in to the system, log home page visit
         if ($this->session->has("userid")) {
-            Userlog::byUserID($this->session->get("userid"))->setAction("Visiting Home Page")->create();
+            BaseUserLog::byUserID($this->session->get("userid"))->setAction("Visiting Home Page")->create();
         }
     }
 

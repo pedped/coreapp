@@ -13,7 +13,7 @@ class EmailItems extends EmailManager {
      */
     public function sendPasswordRequest($name, $email, $resetcode) {
         // load the email template from server
-        $emailTemplate = EmailTemplate::findFirst("name = '" . EMAILTEMPLATE_RESETPASSWORD . "'");
+        $emailTemplate = BaseEmailTemplate::findFirst("name = '" . EMAILTEMPLATE_RESETPASSWORD . "'");
         $emailTemplate->setParameters(array(
             "name" => $name,
             "email" => $email,

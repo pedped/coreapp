@@ -2,12 +2,16 @@
 
 use Simpledom\Core\AtaModel;
 
-class Track extends AtaModel {
+class BaseTrack extends AtaModel {
+
     /**
      * QUERY TO FETCH LAST MONTH VISITS
      * SELECT day(time) , count(*) FROM `track` WHERE YEAR(`time`) >= YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
       AND MONTH(`time`) >= MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY day(time)
      */
+    public function getSource() {
+        return "track";
+    }
 
     /**
      *
@@ -63,10 +67,10 @@ class Track extends AtaModel {
 
     /**
      * Fetch the user who visited the page
-     * @return User
+     * @return BaseUser
      */
     public function getUser() {
-        return User::findFirst($this->userid);
+        return BaseUser::findFirst($this->userid);
     }
 
     public function getDate() {

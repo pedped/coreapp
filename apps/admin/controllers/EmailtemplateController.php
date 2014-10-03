@@ -2,7 +2,7 @@
 
 namespace Simpledom\Admin\Controllers;
 
-use EmailTemplate;
+use BaseEmailTemplate;
 
 class EmailtemplateController extends ControllerBase {
 
@@ -14,7 +14,7 @@ class EmailtemplateController extends ControllerBase {
         $this->setTitle("Email Template");
         
         // list email templates
-        $this->view->templates = EmailTemplate::find();
+        $this->view->templates = BaseEmailTemplate::find();
     }
 
     protected function ValidateAccess($id) {

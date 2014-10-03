@@ -2,8 +2,8 @@
 
 namespace Simpledom\Admin\Controllers;
 
-use Contact;
-use User;
+use BaseContact;
+use BaseUser;
 
 class IndexController extends ControllerBase {
 
@@ -14,9 +14,9 @@ class IndexController extends ControllerBase {
     public function indexAction() {
 
         // load total contacts
-        $this->view->totalUsers = User::count();
-        $this->view->totalContacts = Contact::count();
-        $user = new User();
+        $this->view->totalUsers = BaseUser::count();
+        $this->view->totalContacts = BaseContact::count();
+        $user = new BaseUser();
         $this->view->registerChart = $user->getLastMonthRegistarChart();
     }
 

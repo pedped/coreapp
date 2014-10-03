@@ -2,7 +2,11 @@
 
 use Simpledom\Core\AtaModel;
 
-class Sentemail extends AtaModel {
+class BaseSentEmail extends AtaModel {
+
+    public function getSource() {
+        return "Sentemail";
+    }
 
     /**
      *
@@ -77,7 +81,7 @@ class Sentemail extends AtaModel {
     /**
      * 
      * @param type $parameters
-     * @return Sentemail
+     * @return BaseSentEmail
      */
     public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);

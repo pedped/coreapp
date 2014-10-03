@@ -6,7 +6,7 @@ use AtaPaginator;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Simpledom\Core\ViewUserForm;
-use User;
+use BaseUser;
 
 class UserController extends ControllerBase {
 
@@ -20,7 +20,7 @@ class UserController extends ControllerBase {
                 // invalid post
             } else {
                 // valid post, we have to create new user based on the request
-                $user = User::findFirst($id);
+                $user = BaseUser::findFirst($id);
                 $user->fname = $this->request->getPost("firstname");
                 $user->lname = $this->request->getPost("lastname");
                 $user->gender = $this->request->getPost("gender");
@@ -40,7 +40,7 @@ class UserController extends ControllerBase {
         }
 
         // Load Default Information
-        $user = User::findFirst($id);
+        $user = BaseUser::findFirst($id);
         $rf->get("firstname")->setDefault($user->fname);
         $rf->get("lastname")->setDefault($user->lname);
         $rf->get("gender")->setDefault($user->gender);
@@ -75,7 +75,7 @@ class UserController extends ControllerBase {
 
 
         // load the users
-        $users = User::find($parameters);
+        $users = BaseUser::find($parameters);
 
 
         $numberPage = $page;
@@ -122,7 +122,7 @@ class UserController extends ControllerBase {
         }
         $parameters["order"] = "userid";
 
-        $user = User::find($parameters);
+        $user = BaseUser::find($parameters);
         if (count($user) == 0) {
             $this->flash->notice("The search did not find any user");
 
@@ -157,7 +157,7 @@ class UserController extends ControllerBase {
 
         if (!$this->request->isPost()) {
 
-            $user = User::findFirstByuserid($userid);
+            $user = BaseUser::findFirstByuserid($userid);
             if (!$user) {
                 $this->flash->error("user was not found");
 
@@ -192,7 +192,7 @@ class UserController extends ControllerBase {
             ));
         }
 
-        $user = new User();
+        $user = new BaseUser();
 
         $user->fname = $this->request->getPost("fname");
         $user->lname = $this->request->getPost("lname");
@@ -237,7 +237,7 @@ class UserController extends ControllerBase {
 
         $userid = $this->request->getPost("userid");
 
-        $user = User::findFirstByuserid($userid);
+        $user = BaseUser::findFirstByuserid($userid);
         if (!$user) {
             $this->flash->error("user does not exist " . $userid);
 
@@ -284,7 +284,7 @@ class UserController extends ControllerBase {
      */
     public function deleteAction($userid) {
 
-        $user = User::findFirstByuserid($userid);
+        $user = BaseUser::findFirstByuserid($userid);
         if (!$user) {
             $this->flash->error("user was not found");
 

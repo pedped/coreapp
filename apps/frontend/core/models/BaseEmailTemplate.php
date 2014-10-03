@@ -2,7 +2,11 @@
 
 use Simpledom\Core\AtaModel;
 
-class EmailTemplate extends AtaModel {
+class BaseEmailTemplate extends AtaModel {
+
+    public function getSource() {
+        return "emailtemplate";
+    }
 
     /**
      *
@@ -94,12 +98,11 @@ class EmailTemplate extends AtaModel {
     /**
      * 
      * @param type $parameters
-     * @return EmailTemplate
+     * @return BaseEmailTemplate
      */
     public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);
     }
-
 
     public function getPublicResponse() {
         

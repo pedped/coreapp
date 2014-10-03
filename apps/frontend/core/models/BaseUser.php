@@ -7,7 +7,11 @@ define("USERLEVEL_USER", 1);
 use Phalcon\Mvc\Controller;
 use Simpledom\Core\AtaModel;
 
-class User extends AtaModel {
+class BaseUser extends AtaModel {
+
+    public function getSource() {
+        return "user";
+    }
 
     /**
      *
@@ -136,14 +140,14 @@ class User extends AtaModel {
      * Try to login to the system, retrun user on succcessfully
      * @param type $email
      * @param type $password
-     * @return boolean|User
+     * @return boolean|BaseUser
      */
     public static function Login($email, $password) {
 
         // TODO validate email
 
 
-        $user = User::findFirst(array(
+        $user = BaseUser::findFirst(array(
                     "email = '$email'"
         ));
 
@@ -180,7 +184,7 @@ class User extends AtaModel {
     /**
      * 
      * @param type $parameters
-     * @return User
+     * @return BaseUser
      */
     public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);
@@ -217,7 +221,7 @@ class User extends AtaModel {
      * Track User Login
      */
     public function trackLogin($agent, $ip) {
-        $login = new Logins();
+        $login = new BaseLogins();
         $login->agent = $agent;
         $login->ip = $ip;
         $login->userid = $this->userid;
@@ -240,7 +244,7 @@ class User extends AtaModel {
 
     /**
      * get last month registration count
-     * @return User
+     * @return BaseUser
      */
     public function getLastMonthRegistarChart() {
 

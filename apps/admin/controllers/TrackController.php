@@ -3,8 +3,8 @@
 namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
-use Logins;
-use Track;
+use BaseLogins;
+use BaseTrack;
 
 class TrackController extends ControllerBase {
 
@@ -17,7 +17,7 @@ class TrackController extends ControllerBase {
         $this->setTitle("View Visit");
 
         // Load Track
-        $this->view->track = Track::findFirst($id);
+        $this->view->track = BaseTrack::findFirst($id);
     }
 
     public function visitsAction() {
@@ -26,14 +26,14 @@ class TrackController extends ControllerBase {
         $this->setTitle("Visitors");
 
         // load the visits count
-        $tr = new Track();
-        $this->view->totalVisits = Track::count();
+        $tr = new BaseTrack();
+        $this->view->totalVisits = BaseTrack::count();
         $this->view->last7DayVisits = $tr->getLastSevenDaysVistCount();
 
         $this->view->visits = $tr->getLastMonthVisitChart();
 
         // Load Last 100 Visits
-        $this->view->last100Tracks = Track::find(array(
+        $this->view->last100Tracks = BaseTrack::find(array(
                     "limit" => "100",
                     "order" => "id DESC"
         ));
@@ -44,7 +44,7 @@ class TrackController extends ControllerBase {
         $this->setTitle("Logins");
 
         // load the users
-        $logins = Logins::find();
+        $logins = BaseLogins::find();
 
         $numberPage = $page;
 

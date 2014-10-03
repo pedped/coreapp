@@ -3,8 +3,8 @@
 namespace Simpledom\Admin\Controllers;
 
 use AtaController;
-use Contact;
-use User;
+use BaseContact;
+use BaseUser;
 
 abstract class ControllerBase extends AtaController {
 
@@ -14,7 +14,7 @@ abstract class ControllerBase extends AtaController {
         if ($this->session->get("userid", -1) > 0) {
             // get the user to know he is admin
             $userid = $this->session->get("userid");
-            $user = User::findFirst($userid);
+            $user = BaseUser::findFirst($userid);
             if (!$user->isSuperAdmin()) {
                 // invalid request
                 die("You are not authrized to see this page");
@@ -47,13 +47,13 @@ abstract class ControllerBase extends AtaController {
 
 
         // load messages
-        $contacts = Contact::find(array(
+        $contacts = BaseContact::find(array(
                     "limit" => 5,
                     "order" => "date DESC"
         ));
         $this->view->lastMessages = $contacts;
 
-        $this->view->totalContactsUnanswered = Contact::count("reply IS NULL");
+        $this->view->totalContactsUnanswered = BaseContact::count("reply IS NULL");
     }
 
     protected function setTitle($title) {

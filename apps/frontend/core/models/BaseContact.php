@@ -3,7 +3,11 @@
 use Phalcon\Mvc\Model\Validator\Email as Email;
 use Simpledom\Core\AtaModel;
 
-class Contact extends AtaModel {
+class BaseContact extends AtaModel {
+
+    public function getSource() {
+        return "contact";
+    }
 
     /**
      *
@@ -87,7 +91,7 @@ class Contact extends AtaModel {
     /**
      * 
      * @param type $parameters
-     * @return Contact
+     * @return BaseContact
      */
     public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);

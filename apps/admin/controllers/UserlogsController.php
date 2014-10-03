@@ -3,7 +3,7 @@
 namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
-use Userlog;
+use BaseUserLog;
 
 class UserlogsController extends ControllerBase {
 
@@ -17,13 +17,13 @@ class UserlogsController extends ControllerBase {
         // load the users
         $logs = null;
         if ($userid > 0) {
-            $logs = Userlog::find(
+            $logs = BaseUserLog::find(
                             array(
                                 "userid = '$userid'",
                                 "order" => "date DESC"
             ));
         } else {
-            $logs = Userlog::find(
+            $logs = BaseUserLog::find(
                             array(
                                 "order" => "date DESC"
             ));
@@ -45,7 +45,7 @@ class UserlogsController extends ControllerBase {
         $this->setTitle("View Userlog Item");
 
         // set user log
-        $this->view->userLog = Userlog::findFirst($id);
+        $this->view->userLog = BaseUserLog::findFirst($id);
     }
 
     protected function ValidateAccess($id) {

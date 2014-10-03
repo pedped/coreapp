@@ -4,7 +4,7 @@ namespace Simpledom\Frontend\Controllers;
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Url;
-use Track;
+use BaseTrack;
 
 class ControllerBase extends Controller {
 
@@ -45,7 +45,7 @@ class ControllerBase extends Controller {
 
 
         // we have to track user action right there
-        $action = new Track();
+        $action = new BaseTrack();
         $action->date = time();
         $action->agent = $this->request->getUserAgent();
         $action->ip = $_SERVER['REMOTE_ADDR'];

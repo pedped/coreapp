@@ -2,7 +2,11 @@
 
 use Simpledom\Core\AtaModel;
 
-class Faq extends AtaModel {
+class BaseFaq extends AtaModel {
+
+    public function getSource() {
+        return "faq";
+    }
 
     /**
      *
@@ -33,7 +37,7 @@ class Faq extends AtaModel {
     }
 
     public function getItems() {
-        return Faq::find(
+        return BaseFaq::find(
                         array(
                             "head = '$this->head'",
                             "order" => "id DESC"

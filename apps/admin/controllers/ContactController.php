@@ -3,10 +3,10 @@
 namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
-use Contact;
+use BaseContact;
 use Simpledom\Core\ContactReplyForm;
 use Simpledom\Core\SendBulkEmailForm;
-use User;
+use BaseUser;
 
 class ContactController extends ControllerBase {
 
@@ -14,7 +14,7 @@ class ContactController extends ControllerBase {
 
 
         // load the users
-        $contacts = Contact::find(
+        $contacts = BaseContact::find(
                         array(
                             "order" => "date DESC"
         ));
@@ -38,7 +38,7 @@ class ContactController extends ControllerBase {
         $this->setTitle("Un Answered");
 
         // load the users
-        $contacts = Contact::find(
+        $contacts = BaseContact::find(
                         array(
                             "reply IS NULL",
                             "order" => "date DESC"
@@ -62,7 +62,7 @@ class ContactController extends ControllerBase {
         $this->setTitle("Sent Message");
 
         // load the users
-        $contacts = Contact::find(
+        $contacts = BaseContact::find(
                         array(
                             "reply IS NOT NULL",
                             "order" => "date DESC"
@@ -84,14 +84,14 @@ class ContactController extends ControllerBase {
         // set title
         $this->setTitle("Delete Message");
 
-        $this->view->contactItem = Contact::findFirst($id);
+        $this->view->contactItem = BaseContact::findFirst($id);
 
         // create reply form
         $fr = new ContactReplyForm();
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // form is valid
-                $contact = Contact::findFirst($id);
+                $contact = BaseContact::findFirst($id);
                 $contact->reply = $this->request->getPost("message", "string");
                 if (!$contact->save()) {
                     $contact->showErrorMessages($this);
@@ -109,14 +109,14 @@ class ContactController extends ControllerBase {
         // set title
         $this->setTitle("View Contact");
 
-        $this->view->contactItem = Contact::findFirst($id);
+        $this->view->contactItem = BaseContact::findFirst($id);
 
         // create reply form
         $fr = new ContactReplyForm();
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // form is valid
-                $contact = Contact::findFirst($id);
+                $contact = BaseContact::findFirst($id);
                 $contact->reply = $this->request->getPost("message", "string");
                 if (!$contact->save()) {
                     $contact->showErrorMessages($this);
@@ -139,7 +139,7 @@ class ContactController extends ControllerBase {
             if ($fr->isValid($_POST)) {
                 // form is valid, we have to send email
                 // TODO send email
-                $users = User::find();
+                $users = BaseUser::find();
                 
             } else {
                 // invalid

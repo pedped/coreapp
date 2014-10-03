@@ -22,6 +22,7 @@ class Module implements ModuleDefinitionInterface {
                 array(
                     'Simpledom\Frontend\Controllers' => __DIR__ . '/controllers/',
                     'Simpledom\Models' => dirname(__DIR__) . '/admin/models/',
+                    'Simpledom\Core\Models' => dirname(__DIR__) . '/frontend/core/models/',
                     'Simpledom\Core' => dirname(__DIR__) . '/frontend/core/',
                 )
         );
@@ -64,6 +65,7 @@ class Module implements ModuleDefinitionInterface {
                     dirname(__DIR__) . '\\admin\\models\\',
                     __DIR__ . '\\models\\',
                     __DIR__ . '\\core\\',
+                    __DIR__ . '\\core\\models\\',
                     __DIR__ . '\\core\\form\\',
                     __DIR__ . '\\core\\element\\',
                     __DIR__ . '\\controllers\\'

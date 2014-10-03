@@ -3,7 +3,7 @@
 namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
-use Faq;
+use BaseFaq;
 use Simpledom\Core\FaqForm;
 
 class FaqController extends ControllerBase {
@@ -28,7 +28,7 @@ class FaqController extends ControllerBase {
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // form is valid
-                $faq = new \Faq();
+                $faq = new \BaseFaq();
                 $faq->head = $this->request->getPost("head", "string");
                 $faq->title = $this->request->getPost("title", "string");
                 $faq->message = $this->request->getPost("message", "string");
@@ -51,7 +51,7 @@ class FaqController extends ControllerBase {
     public function listAction($page = 1) {
 
         // load the users
-        $faqs = Faq::find(
+        $faqs = BaseFaq::find(
                         array(
                             "order" => "head ASC , id DESC"
         ));
@@ -93,7 +93,7 @@ class FaqController extends ControllerBase {
         }
 
         // check if item exist
-        $item = Faq::findFirst($id);
+        $item = BaseFaq::findFirst($id);
         if (!$item) {
             // item is not exist anymore
             return $this->dispatcher->forward(array(
@@ -104,7 +104,7 @@ class FaqController extends ControllerBase {
 
         // check if user want to remove it
         if ($this->request->isPost()) {
-            $result = Faq::findFirst($id)->delete();
+            $result = BaseFaq::findFirst($id)->delete();
             if (!$result) {
                 $this->flash->error("unable to remove this FAQ item");
             } else {
@@ -121,7 +121,7 @@ class FaqController extends ControllerBase {
         // set title
         $this->setTitle("Edit FAQ");
 
-        $faqItem = Faq::findFirst($id);
+        $faqItem = BaseFaq::findFirst($id);
 
         // create form
         $fr = new FaqForm();
@@ -135,7 +135,7 @@ class FaqController extends ControllerBase {
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // form is valid
-                $faq = Faq::findFirst($id);
+                $faq = BaseFaq::findFirst($id);
                 $faq->head = $this->request->getPost("head", "string");
                 $faq->title = $this->request->getPost("title", "string");
                 $faq->message = $this->request->getPost("message", "string");

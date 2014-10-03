@@ -4,7 +4,7 @@ class EmailManager {
 
     /**
      * email template that be used to send email
-     * @var EmailTemplate 
+     * @var BaseEmailTemplate 
      */
     private $emailTemplate = null;
     private $receivers = null;
@@ -58,7 +58,7 @@ class EmailManager {
 
 
         // create new sent email object
-        $sentEmailModel = new Sentemail();
+        $sentEmailModel = new BaseSentEmail();
         $sentEmailModel->content = $content;
         $sentEmailModel->generaltemplate = $this->emailTemplate->template;
         $sentEmailModel->ip = $_SERVER["REMOTE_ADDR"];
@@ -110,7 +110,7 @@ class EmailManager {
 
     /**
      * 
-     * @return EmailTemplate
+     * @return BaseEmailTemplate
      */
     public function getEmailTemplate() {
         return $this->emailTemplate;

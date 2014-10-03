@@ -2,8 +2,8 @@
 
 namespace Simpledom\Frontend\Controllers;
 
-use Faq;
-use Userlog;
+use BaseFaq;
+use BaseUserLog;
 
 class FaqController extends ControllerBase {
 
@@ -11,12 +11,12 @@ class FaqController extends ControllerBase {
 
         // check if the user logged in to the system, log home page visit
         if ($this->session->has("userid")) {
-            Userlog::byUserID($this->session->get("userid"))->setAction("Visiting FAQ Page")->create();
+            BaseUserLog::byUserID($this->session->get("userid"))->setAction("Visiting FAQ Page")->create();
         }
 
 
         // Load the FAQ's
-        $this->view->list = Faq::find(array(
+        $this->view->list = BaseFaq::find(array(
                     "group" => "head",
                     "order" => "head ASC, id DESC"
         ));

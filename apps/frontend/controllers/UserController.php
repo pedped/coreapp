@@ -8,8 +8,8 @@ use Simpledom\Core\ForgetPasswordForm;
 use Simpledom\Core\LoginForm;
 use Simpledom\Core\ProfileEditForm;
 use Simpledom\Core\RegisterForm;
-use User;
-use Userlog;
+use BaseUser;
+use BaseUserLog;
 
 class UserController extends ControllerBase {
 
@@ -30,7 +30,7 @@ class UserController extends ControllerBase {
             if ($fr->isValid($_POST)) {
                 // valid request, we have to reset user request
                 $email = $this->request->getPost("email", "email");
-                $user = User::findFirst("email = '" . $email . "'");
+                $user = BaseUser::findFirst("email = '" . $email . "'");
                 if (!$user) {
                     // user not found
                     $this->flash->error("Unable to find such user with requested email");
@@ -58,7 +58,7 @@ class UserController extends ControllerBase {
 
 
         // load the users
-        $users = User::find();
+        $users = BaseUser::find();
 
 
         $numberPage = $page;
@@ -81,7 +81,7 @@ class UserController extends ControllerBase {
             } else {
                 $email = $this->request->getPost("email");
                 $password = $this->request->getPost("password");
-                $user = User::Login($email, $password);
+                $user = BaseUser::Login($email, $password);
                 if ($user) {
                     // set session
                     $user->setSession($this);
@@ -90,7 +90,7 @@ class UserController extends ControllerBase {
                     $user->trackLogin($this->request->getUserAgent(), $_SERVER["REMOTE_ADDR"]);
 
                     // we need to log this action for the user
-                    Userlog::byUserID($user->userid)->setAction("Login To System")->Create();
+                    BaseUserLog::byUserID($user->userid)->setAction("Login To System")->Create();
 
                     // go to welcome page
                     return $this->dispatcher->forward(array(
@@ -118,7 +118,7 @@ class UserController extends ControllerBase {
                 // invalid post
             } else {
                 // valid post, we have to create new user based on the request
-                $user = new User();
+                $user = new BaseUser();
                 $user->fname = $this->request->getPost("firstname");
                 $user->lname = $this->request->getPost("lastname");
                 $user->gender = $this->request->getPost("gender");
@@ -166,7 +166,7 @@ class UserController extends ControllerBase {
         }
         $parameters["order"] = "userid";
 
-        $user = User::find($parameters);
+        $user = BaseUser::find($parameters);
         if (count($user) == 0) {
             $this->flash->notice("The search did not find any user");
 
@@ -199,7 +199,7 @@ class UserController extends ControllerBase {
                 // invalid post
             } else {
                 // valid post, we have to create new user based on the request
-                $user = User::findFirst($this->session->get("userid"));
+                $user = BaseUser::findFirst($this->session->get("userid"));
                 $user->fname = $this->request->getPost("firstname");
                 $user->lname = $this->request->getPost("lastname");
                 $user->gender = $this->request->getPost("gender");
@@ -240,7 +240,7 @@ class UserController extends ControllerBase {
             ));
         }
 
-        $user = new User();
+        $user = new BaseUser();
 
         $user->fname = $this->request->getPost("fname");
         $user->lname = $this->request->getPost("lname");
@@ -285,7 +285,7 @@ class UserController extends ControllerBase {
 
         $userid = $this->request->getPost("userid");
 
-        $user = User::findFirstByuserid($userid);
+        $user = BaseUser::findFirstByuserid($userid);
         if (!$user) {
             $this->flash->error("user does not exist " . $userid);
 
@@ -332,7 +332,7 @@ class UserController extends ControllerBase {
      */
     public function deleteAction($userid) {
 
-        $user = User::findFirstByuserid($userid);
+        $user = BaseUser::findFirstByuserid($userid);
         if (!$user) {
             $this->flash->error("user was not found");
 

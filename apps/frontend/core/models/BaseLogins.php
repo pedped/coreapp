@@ -2,7 +2,11 @@
 
 use Simpledom\Core\AtaModel;
 
-class Logins extends AtaModel {
+class BaseLogins extends AtaModel {
+
+    public function getSource() {
+        return "logins";
+    }
 
     /**
      *
@@ -45,7 +49,7 @@ class Logins extends AtaModel {
     }
 
     public function getUser() {
-        return User::findFirst($this->userid);
+        return BaseUser::findFirst($this->userid);
     }
 
     public function beforeValidationOnCreate() {
