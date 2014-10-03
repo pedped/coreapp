@@ -41,4 +41,15 @@ class AtaForm extends Form {
         echo '</p>';
     }
 
+    public function renderInfo($name) {
+        $element = $this->get($name);
+
+        echo '<div class="form-group">
+                <label for="' . $element->getName() . '" class="col-sm-2 control-label">' . $element->getLabel() . '</label>
+                <div class="col-sm-10">
+                  ' . $element->getDefault() . '
+                </div>
+              </div>';
+    }
+
 }

@@ -74,19 +74,16 @@ try {
 
     echo $application->handle()->getContent();
 
-
-
-
-
     //Get the generated profiles from the profiler
     $profiles = $di->get('profiler')->getProfiles();
-    if (isset($profiles)) {
+    if (false && isset($profiles)) {
         foreach ($profiles as $profile) {
-//        var_dump("SQL Statement: ", $profile->getSQLStatement());
-//        echo("Start Time: " . $profile->getInitialTime());
-//        echo("Final Time: " . $profile->getFinalTime());
-//        echo("Total Elapsed Time: " . $profile->getTotalElapsedSeconds());
-//        echo "<br/>";
+            echo "<pre>";
+            echo("<b>" . $profile->getSQLStatement() . "</b>");
+            echo("<br/><br/>Start Time: " . $profile->getInitialTime());
+            echo("<br/>Final Time: " . $profile->getFinalTime());
+            echo("<br/>Total Time: " . $profile->getTotalElapsedSeconds());
+            echo "</pre><hr/>";
         }
     }
 } catch (Exception $e) {

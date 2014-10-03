@@ -151,4 +151,17 @@ class FaqController extends ControllerBase {
         $this->view->form = $fr;
     }
 
+    public function viewAction($id) {
+
+        $item = BaseFaq::findFirst($id);
+        $this->view->item = $item;
+
+        $form = new FaqForm();
+        $form->get("head")->setDefault($item->head);
+        $form->get("title")->setDefault($item->title);
+        $form->get("message")->setDefault($item->message);
+        $this->view->form = $form;
+        
+    }
+
 }
