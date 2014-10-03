@@ -21,7 +21,7 @@ class Module implements ModuleDefinitionInterface {
         $loader->registerNamespaces(
                 array(
                     'Simpledom\Admin\Controllers' => __DIR__ . '/controllers/',
-                    'Simpledom\Core' => dirname(__DIR__) . '/frontend/core/',
+                    'Simpledom\Core' => dirname(__DIR__) . '/core/',
                     'Simpledom\Core\SiteForms' => dirname(__DIR__) . '/admin/forms/',
                     'Simpledom\Models' => dirname(__DIR__) . '/frontend/models/',
                     'Simpledom\Admin\Models' => __DIR__ . '/models/',
@@ -67,8 +67,8 @@ class Module implements ModuleDefinitionInterface {
                     __DIR__ . '\\models\\',
                     __DIR__ . '\\controllers\\',
                     __DIR__ . '\\forms\\',
-                    dirname(__DIR__) . '\\frontend\\core\\',
-                    dirname(__DIR__) . '\\frontend\\models\\',
+                    dirname(__DIR__) . '\\core\\',
+                    dirname(__DIR__) . '\\models\\',
                     dirname(__DIR__) . '\\admin\\forms\\',
                 )
         )->register();

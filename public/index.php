@@ -35,8 +35,8 @@ try {
     //Register some namespaces
     $loader->registerNamespaces(
             array(
-                "Simpledom\Core" => dirname(__DIR__) . "/apps/frontend/core/",
-                "Simpledom\Core" => dirname(__DIR__) . "/apps/frontend/core/form/",
+                "Simpledom\Core" => dirname(__DIR__) . "/apps/core/",
+                "Simpledom\Core" => dirname(__DIR__) . "/apps/core/form/",
             //"Simpledom\Core" => dirname(__DIR__) . "/apps/frontend/core/model/",
             )
     );
@@ -45,10 +45,10 @@ try {
     // Register some directories
     $loader->registerDirs(
             array(
-                dirname(__DIR__) . "/apps/frontend/core/",
-                dirname(__DIR__) . "/apps/frontend/core/form/",
+                dirname(__DIR__) . "/apps/core/",
+                dirname(__DIR__) . "/apps/core/form/",
                 dirname(__DIR__) . "/apps/frontend/models/",
-                dirname(__DIR__) . "/apps/frontend/core/models/",
+                dirname(__DIR__) . "/apps/core/models/",
                 dirname(__DIR__) . "/apps/admin/forms/",
             )
     );
