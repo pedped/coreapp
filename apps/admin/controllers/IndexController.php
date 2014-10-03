@@ -20,4 +20,8 @@ class IndexController extends ControllerBase {
         $this->view->registerChart = $user->getLastMonthRegistarChart();
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
+
 }

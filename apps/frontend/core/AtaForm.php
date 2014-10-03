@@ -27,7 +27,6 @@ class AtaForm extends Form {
         $messages = $this->getMessagesFor($element->getName());
 
 
-
         echo '<p>';
         echo '<label for="', $element->getName(), '">', $element->getLabel(), '</label>';
         echo $element;

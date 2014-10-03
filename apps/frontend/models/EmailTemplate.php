@@ -100,22 +100,6 @@ class EmailTemplate extends AtaModel {
         return parent::findFirst($parameters);
     }
 
-    /**
-     * Set recivers
-     * @param ArrayObject|String $emails
-     */
-    public function setReceivers($emails) {
-        if (is_array($emails)) {
-            $this->receivers = $emails;
-        } else {
-            $this->receivers = array();
-            $this->receivers[] = $emails;
-        }
-    }
-
-    public function sendEmail() {
-        var_dump($this->parameters);
-    }
 
     public function getPublicResponse() {
         

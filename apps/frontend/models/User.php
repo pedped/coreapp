@@ -186,6 +186,10 @@ class User extends AtaModel {
         return parent::findFirst($parameters);
     }
 
+    /**
+     * send password request email
+     * @return boolean
+     */
     public function requestResetPassword() {
 
         // we have to generate a password request code
@@ -194,7 +198,8 @@ class User extends AtaModel {
 
         // send email to user about the request
         if ($this->save()) {
-            EmailManager::sendPasswordRequest($this->getFullName(), $this->email, $this->resetcode);
+            $email = new EmailItems();
+            return $email->sendPasswordRequest($this->getFullName(), $this->email, $this->resetcode);
         } else {
             return false;
         }

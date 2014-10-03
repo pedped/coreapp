@@ -314,5 +314,8 @@ class UserController extends ControllerBase {
         ));
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
 
 }

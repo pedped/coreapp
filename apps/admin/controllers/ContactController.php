@@ -148,4 +148,8 @@ class ContactController extends ControllerBase {
         $this->view->sendForm = $fr;
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
+
 }

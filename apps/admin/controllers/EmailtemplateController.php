@@ -17,4 +17,8 @@ class EmailtemplateController extends ControllerBase {
         $this->view->templates = EmailTemplate::find();
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
+
 }

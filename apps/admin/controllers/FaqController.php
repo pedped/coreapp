@@ -3,12 +3,24 @@
 namespace Simpledom\Admin\Controllers;
 
 use AtaPaginator;
-use Contact;
 use Faq;
-use Simpledom\Core\ContactReplyForm;
 use Simpledom\Core\FaqForm;
 
 class FaqController extends ControllerBase {
+
+    public function initialize() {
+        parent::initialize();
+        $this->setTitle("FAQ");
+    }
+
+    /**
+     * this function will validate request access
+     * @param type $id
+     * @return boolean
+     */
+    protected function ValidateAccess($id) {
+        return true;
+    }
 
     public function addAction() {
 
@@ -38,7 +50,6 @@ class FaqController extends ControllerBase {
 
     public function listAction($page = 1) {
 
-
         // load the users
         $faqs = Faq::find(
                         array(
@@ -54,57 +65,90 @@ class FaqController extends ControllerBase {
             "limit" => 10,
             "page" => $numberPage
         ));
+
+
+        $paginator->
+                setTableHeaders(array(
+                    "ID", "Head", "Title", "Description", "Action"
+                ))->
+                setFields(array(
+                    "id", "head", "title", "message"
+                ))->
+                setEditUrl(
+                        "edit"
+                )->
+                setDeleteUrl(
+                        "delete"
+                )->setListPath(
+                'list');
+
         $this->view->list = $paginator->getPaginate();
     }
 
     public function deleteAction($id) {
-        // set title
-        $this->setTitle("Delete Message");
 
-        $this->view->contactItem = Contact::findFirst($id);
+        if (!$this->ValidateAccess($id)) {
+            // user do nto have permession to remove this object
+            return $this->response->setStatusCode("403", "You do not have permession to access this page");
+        }
 
-        // create reply form
-        $fr = new ContactReplyForm();
+        // check if item exist
+        $item = Faq::findFirst($id);
+        if (!$item) {
+            // item is not exist anymore
+            return $this->dispatcher->forward(array(
+                        "controller" => "faq",
+                        "action" => "list"
+            ));
+        }
+
+        // check if user want to remove it
         if ($this->request->isPost()) {
-            if ($fr->isValid($_POST)) {
-                // form is valid
-                $contact = Contact::findFirst($id);
-                $contact->reply = $this->request->getPost("message", "string");
-                if (!$contact->save()) {
-                    $contact->showErrorMessages($this);
-                } else {
-                    $contact->showErrorMessages($this, "Reply Message Sent Successfully");
-                }
+            $result = Faq::findFirst($id)->delete();
+            if (!$result) {
+                $this->flash->error("unable to remove this FAQ item");
             } else {
-                // invalid
+                $this->flash->success("FAQ item deleted successfully");
+                return $this->dispatcher->forward(array(
+                            "controller" => "faq",
+                            "action" => "list"
+                ));
             }
         }
-        // $this->view->item = $fr;
     }
 
-    public function viewAction($id) {
+    public function editAction($id) {
         // set title
-        $this->setTitle("View Contact");
+        $this->setTitle("Edit FAQ");
 
-        $this->view->contactItem = Contact::findFirst($id);
+        $faqItem = Faq::findFirst($id);
 
-        // create reply form
-        $fr = new ContactReplyForm();
+        // create form
+        $fr = new FaqForm();
+
+        // set default values
+        $fr->get("head")->setDefault($faqItem->head);
+        $fr->get("title")->setDefault($faqItem->title);
+        $fr->get("message")->setDefault($faqItem->message);
+
+        // check for post request
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // form is valid
-                $contact = Contact::findFirst($id);
-                $contact->reply = $this->request->getPost("message", "string");
-                if (!$contact->save()) {
-                    $contact->showErrorMessages($this);
+                $faq = Faq::findFirst($id);
+                $faq->head = $this->request->getPost("head", "string");
+                $faq->title = $this->request->getPost("title", "string");
+                $faq->message = $this->request->getPost("message", "string");
+                if (!$faq->save()) {
+                    $faq->showErrorMessages($this);
                 } else {
-                    $contact->showErrorMessages($this, "Reply Message Sent Successfully");
+                    $faq->showSuccessMessages($this, "FAQ Saved Successfully");
                 }
             } else {
                 // invalid
             }
         }
-        $this->view->replyForm = $fr;
+        $this->view->form = $fr;
     }
 
 }

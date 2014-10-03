@@ -23,4 +23,8 @@ class SiteinfoController extends ControllerBase {
         $this->view->siteInfoForm = $fr;
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
+
 }

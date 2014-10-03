@@ -57,4 +57,8 @@ class TrackController extends ControllerBase {
         $this->view->users = $paginator->getPaginate();
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
+
 }

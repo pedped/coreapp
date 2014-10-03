@@ -48,4 +48,8 @@ class UserlogsController extends ControllerBase {
         $this->view->userLog = Userlog::findFirst($id);
     }
 
+    protected function ValidateAccess($id) {
+        
+    }
+
 }

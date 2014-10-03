@@ -36,7 +36,11 @@ class UserController extends ControllerBase {
                     $this->flash->error("Unable to find such user with requested email");
                 } else {
                     // user found, we have to request password request for user
-                    $user->requestResetPassword();
+                    if ($user->requestResetPassword()) {
+                        $this->flash->success("Password Reset Link Sent To Your Email, Please Check Your Email");
+                    } else {
+                        $this->flash->error("Unable to send password reset link");
+                    }
                 }
             } else {
                 // invalid request

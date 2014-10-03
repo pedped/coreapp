@@ -2,10 +2,11 @@
 
 namespace Simpledom\Admin\Controllers;
 
+use AtaController;
 use Contact;
-use Phalcon\Mvc\Controller;
+use User;
 
-class ControllerBase extends Controller {
+abstract class ControllerBase extends AtaController {
 
     public function initialize() {
 
@@ -13,7 +14,7 @@ class ControllerBase extends Controller {
         if ($this->session->get("userid", -1) > 0) {
             // get the user to know he is admin
             $userid = $this->session->get("userid");
-            $user = \User::findFirst($userid);
+            $user = User::findFirst($userid);
             if (!$user->isSuperAdmin()) {
                 // invalid request
                 die("You are not authrized to see this page");

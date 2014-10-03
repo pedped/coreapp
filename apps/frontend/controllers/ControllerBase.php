@@ -8,6 +8,16 @@ use Track;
 
 class ControllerBase extends Controller {
 
+    private $pageTitle = "Title";
+
+    public function getPageTitle() {
+        return $this->pageTitle;
+    }
+
+    public function setPageTitle($pageTitle) {
+        $this->pageTitle = $pageTitle;
+    }
+
     /**
      * this function will get website settings
      * @param type $title
@@ -47,6 +57,8 @@ class ControllerBase extends Controller {
             $action->userid = $this->session->get("userid");
         }
 
+        // set page title
+        $this->view->pageTitle = $this->pageTitle;
 
         // save the action
         $action->create();
