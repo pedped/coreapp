@@ -1,9 +1,11 @@
 <?php
 
-class EmailTemplate extends BaseEmailTemplate {
+use Simpledom\Core\AtaModel;
+
+class BaseSystemLog extends AtaModel {
 
     public function getSource() {
-        return 'email_template';
+        return 'systemlog';
     }
 
     /**
@@ -13,16 +15,28 @@ class EmailTemplate extends BaseEmailTemplate {
     public $id;
 
     /**
-     * Name
+     * Title
      * @var string
      */
-    public $name;
+    public $title;
 
     /**
-     * Template
+     * IP
      * @var string
      */
-    public $template;
+    public $ip;
+
+    /**
+     * Message
+     * @var string
+     */
+    public $message;
+
+    /**
+     * Date
+     * @var string
+     */
+    public $date;
 
     /**
      * Validations and business logic
@@ -45,7 +59,7 @@ class EmailTemplate extends BaseEmailTemplate {
     }
 
     public function beforeValidationOnCreate() {
-        //$this->date = time();
+        $this->date = time();
         //$this->delete = 0;
     }
 
@@ -55,6 +69,45 @@ class EmailTemplate extends BaseEmailTemplate {
 
     public function getPublicResponse() {
         
+    }
+
+    /**
+     * 
+     * @return BaseSystemLog
+     */
+    public static function init(&$item) {
+        $item = new BaseSystemLog();
+        return $item;
+    }
+
+    /**
+     * Set Title
+     * @param type $title
+     * @return BaseSystemLog
+     */
+    public function setTitle($title) {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * Set Message
+     * @param type $message
+     * @return BaseSystemLog
+     */
+    public function setMessage($message) {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * Set ip
+     * @param type $ip
+     * @return BaseSystemLog
+     */
+    public function setIP($ip) {
+        $this->ip = $ip;
+        return $this;
     }
 
 }

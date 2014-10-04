@@ -2,14 +2,15 @@
 
 namespace Simpledom\Frontend\Controllers;
 
+use BaseUser;
+use BaseUserLog;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Simpledom\Core\ForgetPasswordForm;
 use Simpledom\Core\LoginForm;
 use Simpledom\Core\ProfileEditForm;
 use Simpledom\Core\RegisterForm;
-use BaseUser;
-use BaseUserLog;
+use BaseSystemLog;
 
 class UserController extends ControllerBase {
 

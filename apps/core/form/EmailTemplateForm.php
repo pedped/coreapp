@@ -1,6 +1,6 @@
 <?php
 
-namespace Simpledom\Core\SiteForms;
+namespace Simpledom\Core;
 
 use EditorElement;
 use Phalcon\Forms\Element\Submit;
