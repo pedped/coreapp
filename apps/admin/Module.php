@@ -68,6 +68,7 @@ class Module implements ModuleDefinitionInterface {
                     __DIR__ . '\\controllers\\',
                     __DIR__ . '\\forms\\',
                     dirname(__DIR__) . '\\core\\',
+                    dirname(__DIR__) . '\\core\\element\\',
                     dirname(__DIR__) . '\\models\\',
                     dirname(__DIR__) . '\\admin\\forms\\',
                 )
@@ -97,6 +98,7 @@ class Module implements ModuleDefinitionInterface {
         $di->set('url', function() {
             $url = new Url();
             $url->setBaseUri('/simpledom/admin/');
+            $url->publicurl = "http://localhost/simpledom/";
             return $url;
         });
 

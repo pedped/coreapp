@@ -5,7 +5,7 @@ use Simpledom\Core\AtaModel;
 class BaseEmailTemplate extends AtaModel {
 
     public function getSource() {
-        return "emailtemplate";
+        return "email_template";
     }
 
     /**

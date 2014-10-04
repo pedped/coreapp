@@ -198,6 +198,9 @@ class AtaPaginator extends Paginator {
             $result .= "<th>$value</th>";
         }
 
+        // add action box
+        $result .= "<th>Action</th>";
+
         // close the table fields
         $result .= "<tr>";
 
