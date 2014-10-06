@@ -1,6 +1,6 @@
 <?php
 
-namespace Simpledom\Admin\Controllers;
+namespace Simpledom\Admin\BaseControllers;
 
 use AtaController;
 use BaseContact;
