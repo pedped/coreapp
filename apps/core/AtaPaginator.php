@@ -133,6 +133,12 @@ class AtaPaginator extends Paginator {
      */
     public function getHeader($enableSearch = true, $enableOrder = true) {
 
+        // check if we have search box
+        if (is_array($this->searchItemArrays) && count($this->searchItemArrays) == 0) {
+            return "";
+        }
+
+
         $result = "
             
             <form method='post' class='paginator-header form-inline'>
@@ -210,17 +216,38 @@ class AtaPaginator extends Paginator {
         foreach ($paginate->items as $item) {
             $result .= "<tr>";
             foreach ($this->getFields() as $key => $value) {
-                $text = $item->$value;
-                $result .= "<td>$text</td>";
-            }
 
+                // check if we have to show function or property
+                if (strpos($value, "(") == 0) {
+                    // it is field
+                    $text = $item->$value;
+                    $result .= "<td>$text</td>";
+                } else {
+                    // it is function
+                    $s = strpos($value, "(");
+                    $text = call_user_func(array($item, substr($value, 0, $s)));
+                    if (is_bool($text)) {
+                        if ((boolval($text))) {
+                            $result .= "<td>Yes</td>";
+                        } else {
+                            $result .= "<td>No</td>";
+                        }
+                    } else {
+                        $result .= "<td>$text</td>";
+                    }
+                }
+            }
             // add action bar
             $result .= "
-                <td>
-                     <a href='$this->editUrl/$item->id' class='on-default edit-row'><i class='fa fa-pencil'></i></a>
-                     <a href='$this->deleteUrl/$item->id' class='on-default remove-row'><i class='fa fa-trash-o'></i></a>
-                </td>";
+                <td>";
+            if (isset($this->editUrl)) {
+                $result .= "<a href='$this->editUrl/$item->id' class='on-default edit-row'><i class='fa fa-pencil' title='View/Edit'></i></a>";
+            }
+            if (isset($this->deleteUrl)) {
+                $result .= "&nbsp;<a href='$this->deleteUrl/$item->id' class='on-default remove-row'><i class='fa fa-trash-o' title='delete'></i></a>";
+            }
 
+            $result .= "</td>";
             $result .= "</tr>";
             $i++;
         }

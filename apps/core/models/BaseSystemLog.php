@@ -63,9 +63,9 @@ class BaseSystemLog extends AtaModel {
         //$this->delete = 0;
     }
 
-    //public function getDate() {
-    //    return date('Y-m-d H:m:s', $this->date);
-    //}
+    public function getDate() {
+        return date('Y-m-d H:m:s', $this->date);
+    }
 
     public function getPublicResponse() {
         

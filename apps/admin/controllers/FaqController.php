@@ -69,7 +69,7 @@ class FaqController extends ControllerBase {
 
         $paginator->
                 setTableHeaders(array(
-                    "ID", "Head", "Title", "Description", "Action"
+                    "ID", "Head", "Title", "Description"
                 ))->
                 setFields(array(
                     "id", "head", "title", "message"

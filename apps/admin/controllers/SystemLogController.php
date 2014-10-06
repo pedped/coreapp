@@ -73,97 +73,14 @@ class SystemLogController extends ControllerBase {
                     'ID', 'Title', 'IP', 'Message', 'Date'
                 ))->
                 setFields(array(
-                    'id', 'title', 'ip', 'message', 'date'
+                    'id', 'title', 'ip', 'message', 'getDate()'
                 ))->
                 setEditUrl(
                         'view'
-                )->
-                setDeleteUrl(
-                        'delete'
                 )->setListPath(
                 'list');
 
         $this->view->list = $paginator->getPaginate();
-    }
-
-    public function deleteAction($id) {
-
-        if (!$this->ValidateAccess($id)) {
-            // user do not have permission to remove this object
-            return $this->response->setStatusCode('403', 'You do not have permission to access this page');
-        }
-
-        // check if item exist
-        $item = BaseSystemLog::findFirst($id);
-        if (!$item) {
-            // item is not exist any more
-            return $this->dispatcher->forward(array(
-                        'controller' => 'systemlog',
-                        'action' => 'list'
-            ));
-        }
-
-        // check if user want to remove it
-        if ($this->request->isPost()) {
-            $result = BaseSystemLog::findFirst($id)->delete();
-            if (!$result) {
-                $this->flash->error('unable to remove this SystemLog item');
-            } else {
-                $this->flash->success('SystemLog item deleted successfully');
-                return $this->dispatcher->forward(array(
-                            'controller' => 'systemlog',
-                            'action' => 'list'
-                ));
-            }
-        }
-    }
-
-    public function editAction($id) {
-
-
-        if (!$this->ValidateAccess($id)) {
-            // user do not have permission to edut this object
-            return $this->response->setStatusCode('403', 'You do not have permission to access this page');
-        }
-
-        // set title
-        $this->setTitle('Edit SystemLog');
-
-        $systemlogItem = BaseSystemLog::findFirst($id);
-
-        // create form
-        $fr = new SystemLogForm();
-
-        // check for post request
-        if ($this->request->isPost()) {
-            if ($fr->isValid($_POST)) {
-                // form is valid
-                $systemlog = BaseSystemLog::findFirst($id);
-                $systemlog->title = $this->request->getPost('title', 'string');
-
-                $systemlog->ip = $this->request->getPost('ip', 'string');
-
-                $systemlog->message = $this->request->getPost('message', 'string');
-
-                $systemlog->date = $this->request->getPost('date', 'string');
-                if (!$systemlog->save()) {
-                    $systemlog->showErrorMessages($this);
-                } else {
-                    $systemlog->showSuccessMessages($this, 'SystemLog Saved Successfully');
-                }
-            } else {
-                // invalid
-            }
-        } else {
-
-            // set default values
-
-            $fr->get('title')->setDefault($systemlogItem->title);
-            $fr->get('ip')->setDefault($systemlogItem->ip);
-            $fr->get('message')->setDefault($systemlogItem->message);
-            $fr->get('date')->setDefault($systemlogItem->date);
-        }
-        $this->view->form = $fr;
     }
 
     public function viewAction($id) {
