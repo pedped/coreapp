@@ -1,8 +1,6 @@
 <?php
 
-use Phalcon\Forms\Element;
-
-class ImageElement extends Element {
+class ImageElement extends BaseElement {
 
     private $href;
 

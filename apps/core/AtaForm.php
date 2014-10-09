@@ -19,7 +19,7 @@ class AtaForm extends Form {
         return $this->security->getToken();
     }
 
-    public function renderDecorated($name) {
+    public function renderDecorated($name, $width = "auto", $height = "auto") {
         $element = $this->get($name);
 
 
@@ -28,8 +28,11 @@ class AtaForm extends Form {
 
 
         echo '<p>';
+        echo '<p>';
         echo '<label for="', $element->getName(), '">', $element->getLabel(), '</label>';
+        echo '<div style="width:' . $width . ';height:' . $height . '">';
         echo $element;
+        echo '<div>';
         if (count($messages)) {
             //Print each element
             echo '<div class="element-error-messages">';

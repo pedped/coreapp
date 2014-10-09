@@ -1,11 +1,9 @@
 <?php
 
-use Phalcon\Forms\Element;
-
 /**
  * Uses CKEDITOR
  */
-class EditorElement extends Element {
+class EditorElement extends BaseElement {
 
     private $language = "en";
 

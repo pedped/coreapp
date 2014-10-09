@@ -1,11 +1,9 @@
 <?php
 
-use Phalcon\Forms\Element;
-
 /**
  * Uses CKEDITOR
  */
-class MapElement extends Element {
+class MapElement extends BaseElement {
 
     private $language = "en";
     private $markTitle = "Title";

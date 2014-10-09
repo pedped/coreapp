@@ -342,8 +342,6 @@ class BaseUser extends AtaModel {
     public static function Login($email, $password) {
 
         // TODO validate email
-
-
         $user = BaseUser::findFirst(array(
                     "email = '$email'"
         ));
@@ -451,6 +449,27 @@ AND MONTH(user.regtime) >= MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY day(u
 
     public function getProfileImageLink() {
         return $this->imagelink;
+    }
+
+    /**
+     * verify the password
+     * @param type $password
+     * @return boolean
+     */
+    public function verifyPassword($password) {
+        return strlen($password) > 2 && $this->password == md5($password);
+    }
+
+    /**
+     *  Set new password for user
+     * @param type $errors
+     * @param type $newpass
+     * @return boolean
+     */
+    public function changePassword(&$errors, $newpass) {
+        $newpasshash = md5($newpass);
+        $this->password = $newpasshash;
+        return $this->save();
     }
 
 }

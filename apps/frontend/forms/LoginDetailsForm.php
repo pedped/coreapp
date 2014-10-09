@@ -18,12 +18,6 @@ class LoginDetailsForm extends AtaForm {
         $email->setAttribute("disabled", "true");
         $email->setAttribute("placeholder", "Enter Email");
         $email->setAttribute("class", "form-control disabled");
-        $email->addValidator(new PresenceOf(array(
-            'message' => 'The email is required'
-        )));
-        $email->addValidator(new Email(array(
-            'message' => 'please enter a valid email'
-        )));
         $this->add($email);
 
 

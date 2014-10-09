@@ -15,6 +15,12 @@ abstract class ControllerBase extends AtaController {
      */
     public $errors = array();
 
+    /**
+     * Get User
+     * @var BaseUser 
+     */
+    protected $user;
+
     public function initialize() {
 
         // check if user is loged in and is super admin
@@ -61,6 +67,11 @@ abstract class ControllerBase extends AtaController {
         $this->view->lastMessages = $contacts;
 
         $this->view->totalContactsUnanswered = BaseContact::count("reply IS NULL");
+
+        if ($this->session->has("userid")) {
+            $this->user = BaseUser::findFirst($this->session->get("userid"));
+            $this->view->loggedInUser = $this->user;
+        }
     }
 
     protected function setTitle($title) {

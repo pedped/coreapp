@@ -279,23 +279,22 @@ class UserController extends ControllerBase {
             if (!$form->isValid($_POST)) {
                 // invalid post
             } else {
-                // valid post, we have to create new user based on the request
-                if ($this->request->hasFiles()) {
-                    $image = FileManager::HandleImageUpload($this->errors, $this->request->getUploadedFiles()[0], $outputFileName, $realtiveloaction);
-                    if (!$image) {
-                        $this->flash->error("unable to handle file upload");
+
+                // check if the password is true
+                $currentpass = $this->request->getPost("password", "string");
+                $newpass = $this->request->getPost("newpassword", "string");
+                $newpassconfirm = $this->request->getPost("newpasswordconfirm", "string");
+
+                if (!$this->user->verifyPassword($currentpass)) {
+                    $this->flash->error("Incorrect current password");
+                } else {
+                    // current password is cuuerct
+                    if ($newpass !== $newpassconfirm) {
+                        $this->flash->error("Your new passwords are not look the same");
                     } else {
-                        // check if we can save user
-                        if (!$this->user->setImagelink($image->link)->save()) {
-                            // unable to save user
-                            $this->user->showErrorMessages($this);
-                        } else {
-
-                            // reset the session
-                            $this->user->setSession($this);
-
-                            // show the message
-                            $this->user->showSuccessMessages($this, "Image Changed Successfully");
+                        // everything is OK
+                        if ($this->user->changePassword($this->errors, $newpass)) {
+                            $this->flash->success("Your password changed successfully");
                         }
                     }
                 }
