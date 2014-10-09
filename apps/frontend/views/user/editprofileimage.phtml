@@ -5,16 +5,14 @@
         <?php $this->partial("layouts/usersettingsheader") ?>
         <div class="_account-settings-tab-content">
             <?php echo $this->getContent(); ?>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
 
-                <!-- First Name !-->
-                <?php echo $form->renderDecorated('firstname'); ?>
+                <!-- Image !-->
+                <?php echo $form->renderDecorated('image'); ?>
 
-                <!-- Last Name!-->
-                <?php echo $form->renderDecorated('lastname'); ?>
+                <!-- File !-->
+                <?php echo $form->renderDecorated('file'); ?>
 
-                <!-- Gender !-->
-                <?php echo $form->renderDecorated('gender'); ?>
                 <br/>
                 <!-- Submit !-->
                 <?php echo $form->renderDecorated('submit'); ?>

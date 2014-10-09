@@ -33,7 +33,8 @@
                             <li><a href="<?php echo $this->url->get("user/logout") ?>">Logout</a></li>
                         </ul>
                     </li>
-                <?php else: ?>
+                    <li><img src="<?php echo $this->session->get("imagelink"); ?>"  class="img _header-profile-image" /></li>
+                    <?php else: ?>
                     <li><a href="<?php echo $this->url->get("user/login") ?>">Login</a></li>
                     <li><a href="<?php echo $this->url->get("user/register") ?>">Register</a></li>
                 <?php endif; ?>

@@ -2,15 +2,19 @@
 
 namespace Simpledom\Frontend\Controllers;
 
+use AtaPaginator;
+use BaseLogins;
 use BaseUser;
 use BaseUserLog;
+use LoginDetailsForm;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
+use ProfileImageForm;
+use Simpledom\Core\Classes\FileManager;
 use Simpledom\Core\ForgetPasswordForm;
 use Simpledom\Core\LoginForm;
 use Simpledom\Core\ProfileEditForm;
 use Simpledom\Core\RegisterForm;
-use BaseSystemLog;
 
 class UserController extends ControllerBase {
 
@@ -227,6 +231,111 @@ class UserController extends ControllerBase {
 
 
         $this->view->form = $pef;
+    }
+
+    public function editprofileimageAction() {
+        // create new login form
+        $pef = new ProfileImageForm();
+        $pef->get("image")->setHref($this->user->getProfileImageLink());
+
+        if ($this->request->isPost()) {
+            // user want to submit the post, validae the request
+            if (!$pef->isValid($_POST)) {
+                // invalid post
+            } else {
+                // valid post, we have to create new user based on the request
+                if ($this->request->hasFiles()) {
+                    $image = FileManager::HandleImageUpload($this->errors, $this->request->getUploadedFiles()[0], $outputFileName, $realtiveloaction);
+                    if (!$image) {
+                        $this->flash->error("unable to handle file upload");
+                    } else {
+                        // check if we can save user
+                        if (!$this->user->setImagelink($image->link)->save()) {
+                            // unable to save user
+                            $this->user->showErrorMessages($this);
+                        } else {
+
+                            // reset the session
+                            $this->user->setSession($this);
+
+                            // show the message
+                            $this->user->showSuccessMessages($this, "Image Changed Successfully");
+                        }
+                    }
+                }
+            }
+        }
+
+        $this->view->form = $pef;
+    }
+
+    public function editloginAction() {
+        // create new login form
+        $form = new LoginDetailsForm();
+        $form->get("email")->setDefault($this->user->email);
+
+        if ($this->request->isPost()) {
+            // user want to submit the post, validae the request
+            if (!$form->isValid($_POST)) {
+                // invalid post
+            } else {
+                // valid post, we have to create new user based on the request
+                if ($this->request->hasFiles()) {
+                    $image = FileManager::HandleImageUpload($this->errors, $this->request->getUploadedFiles()[0], $outputFileName, $realtiveloaction);
+                    if (!$image) {
+                        $this->flash->error("unable to handle file upload");
+                    } else {
+                        // check if we can save user
+                        if (!$this->user->setImagelink($image->link)->save()) {
+                            // unable to save user
+                            $this->user->showErrorMessages($this);
+                        } else {
+
+                            // reset the session
+                            $this->user->setSession($this);
+
+                            // show the message
+                            $this->user->showSuccessMessages($this, "Image Changed Successfully");
+                        }
+                    }
+                }
+            }
+        }
+
+        $this->view->form = $form;
+    }
+
+    public function viewloginsAction($page = 1) {
+
+        $userid = (int) $this->user->userid;
+        // load the logins
+        $logins = BaseLogins::find(
+                        array(
+                            "userid = '$userid'",
+                            'order' => 'id DESC'
+        ));
+
+
+        $numberPage = $page;
+
+        // create paginator
+        $paginator = new AtaPaginator(array(
+            'data' => $logins,
+            'limit' => 10,
+            'page' => $numberPage
+        ));
+
+
+        $paginator->
+                setTableHeaders(array(
+                    'Date', 'IP', 'Agent'
+                ))->
+                setFields(array(
+                    'getDate()', 'ip', 'agent'
+                ))->setListPath(
+                'list');
+
+        $this->view->list = $paginator->getPaginate();
     }
 
     /**

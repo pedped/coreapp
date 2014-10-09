@@ -2,13 +2,21 @@
 
 namespace Simpledom\Frontend\Controllers;
 
+use BaseTrack;
+use BaseUser;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Url;
-use BaseTrack;
 
 class ControllerBase extends Controller {
 
     private $pageTitle = "Title";
+    protected $errors;
+
+    /**
+     * Get User
+     * @var BaseUser 
+     */
+    protected $user;
 
     public function getPageTitle() {
         return $this->pageTitle;
@@ -55,6 +63,7 @@ class ControllerBase extends Controller {
 
         if ($this->session->has("userid")) {
             $action->userid = $this->session->get("userid");
+            $this->user = BaseUser::findFirst($action->userid);
         }
 
         // set page title

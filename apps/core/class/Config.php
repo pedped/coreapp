@@ -29,4 +29,12 @@ class Config {
         return 1024 * 1024 * 8;
     }
 
+    public static function GetDefaultProfileLink($gender) {
+        return "http://localhost/simpledom/userupload/image/4MqyybZ94UNDsXsJ2M3FGmb8I9XmZ8X4.jpg";
+    }
+
+    public static function getPublicUrl() {
+        return "http://localhost/simpledom/";
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Simpledom\Core\Classes;
 
+use BaseImage;
 use BaseSystemLog;
 use Phalcon\Http\Request\File;
 
@@ -9,7 +10,11 @@ class FileManager {
 
     /**
      * 
+     * @param type $errors
      * @param File $file
+     * @param type $outputFileName
+     * @param string $realtiveloaction
+     * @return boolean|BaseImage
      */
     public static function HandleImageUpload(&$errors, $file, &$outputFileName, &$realtiveloaction) {
         //var_dump($file, Config::GetImagePath());
@@ -44,7 +49,13 @@ class FileManager {
         // now we have to move the file to the right place
         $path = Config::GetImagePath() . "/" . $filename;
         if ($file->moveTo($path)) {
-            return $path;
+            $image = new BaseImage();
+            $image->filesize = filesize($path);
+            $image->mimetype = $file->getType();
+            $image->path = $path;
+            $image->link = Config::getPublicUrl() . $realtiveloaction;
+            $image->create();
+            return $image;
         } else {
             BaseSystemLog::init($item)->setIP($_SERVER["SERVER_ADDR"])->setTitle("Upload Error")->setMessage("Unable to move uploaded file to $path")->create();
             return false;

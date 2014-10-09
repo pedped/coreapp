@@ -6,6 +6,7 @@ define("USERLEVEL_USER", 1);
 
 use Phalcon\Mvc\Controller;
 use Simpledom\Core\AtaModel;
+use Simpledom\Core\Classes\Config;
 
 class BaseUser extends AtaModel {
 
@@ -97,6 +98,202 @@ class BaseUser extends AtaModel {
      */
     public $resetcodedate;
 
+    public function getUserid() {
+        return $this->userid;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getLevel() {
+        return $this->level;
+    }
+
+    public function getFname() {
+        return $this->fname;
+    }
+
+    public function getLname() {
+        return $this->lname;
+    }
+
+    public function getGender() {
+        return $this->gender;
+    }
+
+    public function getImagelink() {
+        return $this->imagelink;
+    }
+
+    public function getRegdate() {
+        return $this->regdate;
+    }
+
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function getVerified() {
+        return $this->verified;
+    }
+
+    public function getToken() {
+        return $this->token;
+    }
+
+    public function getRegtime() {
+        return $this->regtime;
+    }
+
+    public function getResetcode() {
+        return $this->resetcode;
+    }
+
+    public function getResetcodedate() {
+        return $this->resetcodedate;
+    }
+
+    /**
+     * 
+     * @param type $userid
+     * @return BaseUser
+     */
+    public function setUserid($userid) {
+        $this->userid = $userid;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $email
+     * @return BaseUser
+     */
+    public function setEmail($email) {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $level
+     * @return BaseUser
+     */
+    public function setLevel($level) {
+        $this->level = $level;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $fname
+     * @return BaseUser
+     */
+    public function setFname($fname) {
+        $this->fname = $fname;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $lname
+     * @return BaseUser
+     */
+    public function setLname($lname) {
+        $this->lname = $lname;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $gender
+     * @return BaseUser
+     */
+    public function setGender($gender) {
+        $this->gender = $gender;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $imagelink
+     * @return BaseUser
+     */
+    public function setImagelink($imagelink) {
+        $this->imagelink = $imagelink;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $regdate
+     * @return BaseUser
+     */
+    public function setRegdate($regdate) {
+        $this->regdate = $regdate;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $active
+     * @return BaseUser
+     */
+    public function setActive($active) {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $verified
+     * @return BaseUser
+     */
+    public function setVerified($verified) {
+        $this->verified = $verified;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $token
+     * @return BaseUser
+     */
+    public function setToken($token) {
+        $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $regtime
+     * @return BaseUser
+     */
+    public function setRegtime($regtime) {
+        $this->regtime = $regtime;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $resetcode
+     * @return BaseUser
+     */
+    public function setResetcode($resetcode) {
+        $this->resetcode = $resetcode;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $resetcodedate
+     * @return BaseUser
+     */
+    public function setResetcodedate($resetcodedate) {
+        $this->resetcodedate = $resetcodedate;
+        return $this;
+    }
+
     public function getGenderTitle() {
         if ($this->gender == 1) {
             return "Male";
@@ -110,7 +307,7 @@ class BaseUser extends AtaModel {
     }
 
     public function beforeValidationOnCreate() {
-        $this->imagelink = "/var/www/hello/";
+        $this->imagelink = Config::GetDefaultProfileLink($this->gender);
         $this->verified = 0;
         $this->active = 1;
         $this->regdate = date(time());
@@ -250,6 +447,10 @@ class BaseUser extends AtaModel {
 
         return $this->rawQuery("SELECT  YEAR(user.regtime) as year , MONTH(user.regtime) as month , day(user.regtime) as day , count(user.userid) as total FROM `user` WHERE YEAR(user.regtime) >= YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
 AND MONTH(user.regtime) >= MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY day(user.regtime)");
+    }
+
+    public function getProfileImageLink() {
+        return $this->imagelink;
     }
 
 }

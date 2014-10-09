@@ -58,16 +58,12 @@ class ImageControllerBase extends ControllerBase {
                 if ($this->request->hasFiles()) {
                     // valid request, load the files
                     foreach ($this->request->getUploadedFiles() as $file) {
-                        $path = FileManager::HandleImageUpload($this->errors, $file, $outputname, $realtiveloaction);
-                        if (!$path) {
+                        $image = FileManager::HandleImageUpload($this->errors, $file, $outputname, $realtiveloaction);
+                        if (!$image) {
                             // unable to upload file
-                        } else {
-                            $image = new \BaseImage();
-                            $image->filesize = filesize($path);
-                            $image->mimetype = $file->getType();
-                            $image->path = $path;
                             $image->link = $this->url->publicurl . "" . $realtiveloaction;
-                            $image->create();
+                            $image->save();
+                        } else {
 
                             $this->flash->success("Image Uploaded Successfully");
                         }

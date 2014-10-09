@@ -79,3 +79,15 @@ h7{
 hr{
     border-top: 1px solid #C7C7C7;
 }
+
+._account-settings-tab-content{
+    margin-top: 10px;
+}
+
+._header-profile-image{
+    width: 42px;
+    height: 42px;
+    margin-top: 4px;
+    margin-right: 8px;
+    border-radius: 5px;
+}
