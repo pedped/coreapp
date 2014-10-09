@@ -52,6 +52,10 @@ class BaseLogins extends AtaModel {
         return BaseUser::findFirst($this->userid);
     }
 
+    public function getUserName() {
+        return BaseUser::findFirst($this->userid)->getFullName();
+    }
+
     public function beforeValidationOnCreate() {
         $this->time = date("Y-m-d H:i:s", time());
         $this->date = time();

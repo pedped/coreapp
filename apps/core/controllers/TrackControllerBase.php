@@ -61,4 +61,44 @@ class TrackControllerBase extends ControllerBase {
         
     }
 
+    public function uservisitsAction($userid, $page = 1) {
+
+        $this->setTitle("User Visits");
+
+        // load the users
+        $logins = \BaseTrack::find(
+                        array(
+                            "userid = '$userid'",
+                            'order' => 'id DESC'
+        ));
+
+
+        $numberPage = $page;
+
+        // create paginator
+        $paginator = new AtaPaginator(array(
+            'data' => $logins,
+            'limit' => 10,
+            'page' => $numberPage
+        ));
+
+
+        $paginator->
+                setTableHeaders(array(
+                    'ID', 'Name', 'Date', 'IP', 'Agent'
+                ))->
+                setFields(array(
+                    'id', 'getUserName()', 'getDate()', 'ip', 'agent'
+                ))->
+                setEditUrl(
+                        'view'
+                )->
+                setDeleteUrl(
+                        'delete'
+                )->setListPath(
+                'list');
+
+        $this->view->list = $paginator->getPaginate();
+    }
+
 }

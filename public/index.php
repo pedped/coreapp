@@ -67,6 +67,17 @@ try {
     // register autoloader
     $loader->register();
 
+
+    //Register the flash service with custom CSS classes
+    $di->set('flash', function() {
+        $flash = new \Phalcon\Flash\Direct(array(
+            'error' => 'alert alert-danger',
+            'success' => 'alert alert-success',
+            'notice' => 'alert alert-info',
+        ));
+        return $flash;
+    });
+
     /**
      * Include modules
      */

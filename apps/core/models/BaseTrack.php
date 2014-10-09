@@ -73,6 +73,14 @@ class BaseTrack extends AtaModel {
         return BaseUser::findFirst($this->userid);
     }
 
+    /**
+     * return the full name of the user
+     * @return type
+     */
+    public function getUserName() {
+        return BaseUser::findFirst($this->userid)->getFullName();
+    }
+
     public function getDate() {
         return date("Y-m-d H:i:s", $this->date);
     }

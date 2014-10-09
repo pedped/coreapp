@@ -5,8 +5,15 @@ namespace Simpledom\Admin\BaseControllers;
 use AtaController;
 use BaseContact;
 use BaseUser;
+use Phalcon\Mvc\Dispatcher;
 
 abstract class ControllerBase extends AtaController {
+
+    /**
+     * Errors holder
+     * @var Array 
+     */
+    public $errors = array();
 
     public function initialize() {
 
@@ -58,6 +65,38 @@ abstract class ControllerBase extends AtaController {
 
     protected function setTitle($title) {
         $this->view->formTitle = $title;
+    }
+
+    /**
+     * this function will 
+     * @param Dispatcher $dispatcher
+     * @return boolean
+     */
+    public function beforeExecuteRoute($dispatcher) {
+        // This is executed before every found action
+        if ($dispatcher->getActionName() == 'save') {
+
+            $this->flash->error("You don't have permission to save posts");
+
+            $this->dispatcher->forward(array(
+                'controller' => 'home',
+                'action' => 'index'
+            ));
+
+            return false;
+        }
+    }
+
+    /**
+     *  this function will run after every action
+     * @param Dispatcher $dispatcher
+     */
+    public function afterExecuteRoute($dispatcher) {
+        // Executed after every found action
+        // check if we have any error, show the erros
+        if (isset($this->errors) && count($this->errors) > 0) {
+            $this->flash->error(implode("\r\n", $this->errors));
+        }
     }
 
 }

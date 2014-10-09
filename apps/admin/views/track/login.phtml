@@ -26,7 +26,7 @@
                         <?php foreach ($users->items as $item) { ?>
                             <tr>
                                 <td><?php echo $item->userid; ?></td>
-                                <td><?php echo $item->getUser()->getFullName(); ?></td>
+                                <td><a href="<?php echo $this->url->get("track/uservisits/") . $item->userid ?>"><?php echo $item->getUser()->getFullName(); ?></a></td>
                                 <td><?php echo $item->getDate(); ?></td>
                                 <td><?php echo $item->agent; ?></td>
                                 <td><?php echo $item->ip; ?></td>
@@ -40,10 +40,10 @@
                 <!-- Paginatoing Items !-->
                 <div class="center">
                     <div class="pagination pagination-centered">
-                        <li><a class="pag" href="<?php echo $this->url->get("user/list/") ?>">First</a> </li>
-                        <li> <a href="<?php echo $this->url->get("user/list/$users->before") ?>">Previous</a></li>
-                        <li> <a href="<?php echo $this->url->get("user/list/$users->next") ?>">Next</a></li>
-                        <li> <a href="<?php echo $this->url->get("user/list/$users->last") ?>">Last</a></li>
+                        <li><a class="pag" href="<?php echo $this->url->get("track/login/") ?>">First</a> </li>
+                        <li> <a href="<?php echo $this->url->get("track/login/$users->before") ?>">Previous</a></li>
+                        <li> <a href="<?php echo $this->url->get("track/login/$users->next") ?>">Next</a></li>
+                        <li> <a href="<?php echo $this->url->get("track/login/$users->last") ?>">Last</a></li>
                     </div>
                     <div>
                         <?php echo "You are in page ", $users->current, " of ", $users->total_pages; ?>

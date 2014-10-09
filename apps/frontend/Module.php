@@ -67,6 +67,7 @@ class Module implements ModuleDefinitionInterface {
                     __DIR__ . '\\forms\\',
                     __DIR__ . '\\controllers\\',
                     dirname(__DIR__) . '\\core\\',
+                    dirname(__DIR__) . '\\core\\class\\',
                     dirname(__DIR__) . '\\core\\models\\',
                     dirname(__DIR__) . '\\core\\form\\',
                     dirname(__DIR__) . '\\core\\element\\',
