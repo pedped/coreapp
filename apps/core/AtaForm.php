@@ -26,18 +26,21 @@ class AtaForm extends Form {
         //Get any generated messages for the current element
         $messages = $this->getMessagesFor($element->getName());
 
+        $elementName = "";
+        if (defined("DEBUG_MODE")) {
+            $elementName = '<span class="bold red">( ' . $element->getName() . ' )</span>';
+        }
 
         echo '<p>';
-        echo '<p>';
-        echo '<label for="', $element->getName(), '">', $element->getLabel(), '</label>';
+        echo '<label for="', $element->getName(), '">', $element->getLabel(), $elementName, '</label>';
         echo '<div style="width:' . $width . ';height:' . $height . '">';
         echo $element;
-        echo '<div>';
+        echo '</div>';
         if (count($messages)) {
             //Print each element
             echo '<div class="element-error-messages">';
             foreach ($messages as $message) {
-                echo $this->flash->error($message);
+                echo ($message) . "<br/>";
             }
             echo '</div>';
         }

@@ -140,6 +140,17 @@ class ContactControllerBase extends ControllerBase {
                 // form is valid, we have to send email
                 // TODO send email
                 $users = BaseUser::find();
+                $emails = array();
+                foreach ($users as $user) {
+                    $emails[] = $user->email;
+                }
+
+                $subject = $this->request->getPost("subject", "string");
+                $message = $this->request->getPost("message");
+
+                // send email
+                $emilItem = new \EmailItems();
+                $emilItem->sendBulkEmail($emails, $subject, $message);
             } else {
                 // invalid
             }

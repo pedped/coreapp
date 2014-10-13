@@ -146,8 +146,8 @@ class AtaPaginator extends Paginator {
         // we have to check if we have any search array, add that
         if (is_array($this->searchItemArrays) && count($this->searchItemArrays) > 0) {
             // there are some option to add
-            $result.= "Search In &nbsp&nbsp";
-            $result.= "<select name='target'>";
+            $result.= "";
+            $result.= "<div class='row'><div class='col-md-4' style='padding-top: 5px;padding-left: 25px;'>Search In &nbsp&nbsp</div><div class='col-md-2'></div><div class='col-md-6' style='text-align: right;'><select class='form-control' name='target'>";
             foreach ($this->getSearchItemArrays() as $key => $value) {
                 $result.="<option value='$key'>$value</option>";
             }
@@ -159,9 +159,9 @@ class AtaPaginator extends Paginator {
                       <input type='submit' value='Search' class='btn btn-primary'>Search</button>
                     </span>
                 </div>
-                ";
+            </div>";
         }
-        $result.="
+        $result.=" </div>
             </form>
             ";
         return $result;

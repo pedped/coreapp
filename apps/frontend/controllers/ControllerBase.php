@@ -6,6 +6,8 @@ use BaseTrack;
 use BaseUser;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Url;
+use Phalcon\Tag;
+use Settings;
 
 class ControllerBase extends Controller {
 
@@ -24,6 +26,7 @@ class ControllerBase extends Controller {
 
     public function setPageTitle($pageTitle) {
         $this->pageTitle = $pageTitle;
+        Tag::prependTitle($this->getPageTitle());
     }
 
     /**
@@ -68,6 +71,11 @@ class ControllerBase extends Controller {
 
         // set page title
         $this->view->pageTitle = $this->pageTitle;
+
+        $this->view->websiteSettings = Settings::Get();
+
+        // set title
+        Tag::setTitle(" - " . $this->view->websiteSettings->websitename);
 
         // save the action
         $action->create();

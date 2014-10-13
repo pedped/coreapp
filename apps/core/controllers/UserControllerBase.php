@@ -83,7 +83,7 @@ class UserControllerBase extends ControllerBase {
         // create paginator
         $paginator = new AtaPaginator(array(
             "data" => $users,
-            "limit" => 1,
+            "limit" => 10,
             "page" => $numberPage
         ));
 

@@ -9,23 +9,23 @@ use Phalcon\Validation\Validator\StringLength;
 use Simpledom\Admin\BaseControllers\ControllerBase;
 use TextElement;
 
-class SiteInfoForm extends AtaForm {
+class FooterInfoForm extends AtaForm {
 
     public function initialize() {
 
         // Website name
-        $websitename = new TextElement("websitename");
-        $websitename->setLabel("Website Name");
+        $footertitle = new TextElement("footertitle");
+        $footertitle->setLabel("Footer Title");
         //$name->setAttribute("placeholder", "Enter your Full Name");
-        $websitename->setAttribute("class", "form-control");
-        $websitename->addValidator(new PresenceOf(array(
-            'message' => 'The website name is required'
+        $footertitle->setAttribute("class", "form-control");
+        $footertitle->addValidator(new PresenceOf(array(
+            'message' => 'The footer title is required'
         )));
-        $websitename->addValidator(new StringLength(array(
+        $footertitle->addValidator(new StringLength(array(
             'min' => 6,
-            'messageMinimum' => 'The website is too short'
+            'messageMinimum' => 'The footer title is too short'
         )));
-        $this->add($websitename);
+        $this->add($footertitle);
 
         // Website Logo
         // Metadata

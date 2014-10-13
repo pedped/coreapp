@@ -34,11 +34,9 @@ abstract class AtaModel extends Model {
      * @param ControllerBase $controller
      */
     public function showErrorMessages($controller) {
-        echo "<div class='alert alert-danger'>";
         foreach ($this->getMessages() as $message) {
             $controller->flash->error($message);
         }
-        echo "</div>";
     }
 
     /**
@@ -46,9 +44,7 @@ abstract class AtaModel extends Model {
      * @param ControllerBase $controller
      */
     public function showSuccessMessages($controller, $message) {
-        echo "<div class='alert alert-success'>";
         $controller->flash->success($message);
-        echo "</div>";
     }
 
 }

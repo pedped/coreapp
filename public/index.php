@@ -1,5 +1,7 @@
 <?php
 
+//define("DEBUG_MODE", TRUE);
+
 use Phalcon\Exception;
 use Phalcon\Loader;
 use Phalcon\Mvc\Application;

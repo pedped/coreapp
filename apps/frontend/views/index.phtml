@@ -1,3 +1,4 @@
+<?php use Phalcon\Tag; ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,7 +6,7 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400' rel='stylesheet' type='text/css'>
         <?php $this->assets->outputCss('header') ?>
         <?php $this->assets->outputJs('footer') ?>
-        <title></title>
+        <?php echo Tag::getTitle() ?>
     </head>
     <!-- Load The Header !-->
     <?php $this->partial("layouts/header") ?>
@@ -15,8 +16,6 @@
                 <?php echo $this->getContent() ?>
             </div>
         </div>
+        <?php $this->partial("layouts/footer") ?>
     </body>
-    <footer>
-
-    </footer>
 </html>
