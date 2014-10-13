@@ -58,4 +58,15 @@ class AtaForm extends Form {
               </div>';
     }
 
+    /**
+     * flash error message to controller
+     * @param ControllerBase $controller
+     * @param type $this
+     */
+    public function flashErrors(&$controller) {
+        foreach ($this->getMessages() as $message) {
+            $controller->flash->error($message);
+        }
+    }
+
 }

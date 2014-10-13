@@ -98,6 +98,12 @@ class BaseUser extends AtaModel {
      */
     public $resetcodedate;
 
+    /**
+     *
+     * @var integer
+     */
+    public $logintimes;
+
     public function getUserid() {
         return $this->userid;
     }
@@ -352,6 +358,9 @@ class BaseUser extends AtaModel {
                 // valid password, we have to generate token for the request
                 $user->generateToken();
 
+                // incrase loggin time
+                $user->logintimes = $user->logintimes + 1;
+                $user->save();
                 // load the user
                 return $user;
             } else {

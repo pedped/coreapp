@@ -8,6 +8,7 @@ use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Url;
 use Phalcon\Tag;
 use Settings;
+use Simpledom\Core\AtaForm;
 
 class ControllerBase extends Controller {
 
@@ -47,12 +48,21 @@ class ControllerBase extends Controller {
                 ->addCss('css/bt3/bootstrap.css', true)
                 ->addCss('css/app/main.css', true);
 
+
         //Javascripts in the footer
         $this->assets
                 ->collection('footer')
                 ->setPrefix('http://localhost/simpledom/')
                 ->addJs('js/jquery/jquery.min.js', true)
                 ->addJs('bootstrap/bootstrap.js', true);
+
+
+        //Javascripts in the footer
+        $this->assets
+                ->collection('elementscripts')
+                ->setPrefix('http://localhost/simpledom/');
+        $this->assets
+                ->collection('externalscripts');
 
 
         // we have to track user action right there
@@ -77,8 +87,51 @@ class ControllerBase extends Controller {
         // set title
         Tag::setTitle(" - " . $this->view->websiteSettings->websitename);
 
+        // check if website is offline, show offline message
+        if ((bool) $this->view->websiteSettings->offline) {
+            // TODO create offline mode
+        }
+
+
         // save the action
         $action->create();
+    }
+
+    /**
+     * this function will handle form scripts
+     * @param AtaForm $fr
+     */
+    public function handleFormScripts($fr) {
+
+        $loadedScripts = array();
+        foreach ($fr->getElements() as $element) {
+            try {
+                if (method_exists($element, "getScriptnames")) {
+
+                    // load internal scripts
+                    $scripts = $element->getScriptnames();
+                    foreach ($scripts as $scriptname) {
+                        if (!isset($loadedScripts[$scriptname])) {
+                            $loadedScripts[$scriptname] = $scriptname;
+                            $this->assets
+                                    ->collection('elementscripts')->addJs($scriptname, true);
+                        }
+                    }
+
+
+                    $externalscripts = $element->getExternalScriptNames();
+                    foreach ($externalscripts as $scriptname) {
+                        if (!isset($loadedScripts[$scriptname])) {
+                            $loadedScripts[$scriptname] = $scriptname;
+                            $this->assets
+                                    ->collection('externalscripts')->addJs($scriptname, true);
+                        }
+                    }
+                }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
     }
 
 }

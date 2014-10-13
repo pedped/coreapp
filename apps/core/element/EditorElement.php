@@ -7,6 +7,15 @@ class EditorElement extends BaseElement {
 
     private $language = "en";
 
+    public function __construct($name, $attributes = null) {
+        parent::__construct($name, $attributes);
+
+        // we have to add the javascript and css for the item
+        $this->setScriptnames(array(
+            "ckeditor/ckeditor.js"
+        ));
+    }
+
     public function getLanguage() {
         return $this->language;
     }

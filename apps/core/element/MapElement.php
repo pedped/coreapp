@@ -12,6 +12,19 @@ class MapElement extends BaseElement {
     private $lathitude = 25;
     private $longtude = 25;
 
+    public function __construct($name, $attributes = null) {
+        parent::__construct($name, $attributes);
+
+        // we have to add the javascript and css for the item
+        $this->setScriptnames(array(
+            "js/maplace/maplace-0.1.3.min.js"
+        ));
+
+        $this->setExternalScriptNames(array(
+            "http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"
+        ));
+    }
+
     public function getLathitude() {
         return $this->lathitude;
     }

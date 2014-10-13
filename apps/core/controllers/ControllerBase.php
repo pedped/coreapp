@@ -6,6 +6,8 @@ use AtaController;
 use BaseContact;
 use BaseUser;
 use Phalcon\Mvc\Dispatcher;
+use Phalcon\Tag;
+use Settings;
 
 abstract class ControllerBase extends AtaController {
 
@@ -71,6 +73,14 @@ abstract class ControllerBase extends AtaController {
         if ($this->session->has("userid")) {
             $this->user = BaseUser::findFirst($this->session->get("userid"));
             $this->view->loggedInUser = $this->user;
+        }
+
+
+        $this->view->websiteSettings = Settings::Get();
+
+        // check if website is offline, show offline message
+        if ((bool) $this->view->websiteSettings->offline) {
+            $this->flash->notice("<h3 style='margin-top: 0px;margin-bottom: 0px;'>Attention!</h3>website is in offline mode");
         }
     }
 

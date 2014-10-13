@@ -10,6 +10,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
+use Settings;
 
 class ContactForm extends AtaForm {
 
@@ -68,14 +69,17 @@ class ContactForm extends AtaForm {
         $message->setLanguage("en");
         $this->add($message);
 
+
+        $settins = Settings::Get();
+
         // Map
         $map = new MapElement("map");
         $map->setLabel("Our Location");
         $map->setLanguage("en");
         $map->setMarkTitle("Findout Us");
         $map->setMarkDescription("About Us");
-        $map->setLathitude(29.60);
-        $map->setLongtude(52.505);
+        $map->setLathitude($settins->latitude);
+        $map->setLongtude($settins->longtude);
         $map->setZoom(12);
         $this->add($map);
 

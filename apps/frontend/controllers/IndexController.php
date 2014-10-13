@@ -14,8 +14,9 @@ class IndexController extends ControllerBase {
             BaseUserLog::byUserID($this->session->get("userid"))->setAction("Visiting Home Page")->create();
         }
 
-        $form = new MasterTutorialForm();
-        $this->view->form = $form;
+        $fr = new MasterTutorialForm();
+        $this->handleFormScripts($fr);
+        $this->view->form = $fr;
 
         $this->setPageTitle("Homepage");
     }

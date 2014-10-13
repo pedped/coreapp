@@ -3,17 +3,15 @@
 namespace Simpledom\Frontend\Controllers;
 
 use BaseContact;
-use Simpledom\Core\ContactForm;
 use BaseUser;
 use BaseUserLog;
+use Simpledom\Core\ContactForm;
 
 class ContactController extends ControllerBase {
 
-
-
     public function indexAction() {
         $fr = new ContactForm();
-
+        $this->handleFormScripts($fr);
         if ($this->request->isPost()) {
             if ($fr->isValid($_POST)) {
                 // valid request
@@ -52,5 +50,6 @@ class ContactController extends ControllerBase {
         }
         $this->view->form = $fr;
     }
+
 
 }

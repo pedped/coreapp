@@ -1,6 +1,5 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\Email as Email;
 use Simpledom\Core\AtaModel;
 
 class BaseSettings extends AtaModel {
@@ -58,24 +57,41 @@ class BaseSettings extends AtaModel {
     public $address;
 
     /**
-     * Validations and business logic
+     *
+     * @var string
      */
-    public function validation() {
+    public $footertitle;
 
-        $this->validate(
-                new Email(
-                array(
-            'field' => 'email',
-            'required' => true,
-                )
-                )
-        );
-        if ($this->validationHasFailed() == true) {
-            return false;
-        }
-    }
+    /**
+     *
+     * @var string
+     */
+    public $footertext;
 
-   
+    /**
+     *
+     * @var string
+     */
+    public $footermenus;
+
+    /**
+     *
+     * @var string
+     */
+    public $footerenablecontact;
+
+    /**
+     *
+     * @var string
+     */
+    public $offline;
+
+    /**
+     *
+     * @var string
+     */
+    public $offlinemessage;
+
     /**
      * 
      * @param type $parameters

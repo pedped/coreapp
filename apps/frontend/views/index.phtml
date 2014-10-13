@@ -1,11 +1,16 @@
-<?php use Phalcon\Tag; ?>
+<?php
+
+use Phalcon\Tag; ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,700' rel='stylesheet' type='text/css'>
         <?php $this->assets->outputCss('header') ?>
         <?php $this->assets->outputJs('footer') ?>
+        
+        <?php $this->assets->outputJs('externalscripts') ?>
+        <?php $this->assets->outputJs('elementscripts') ?>
         <?php echo Tag::getTitle() ?>
     </head>
     <!-- Load The Header !-->

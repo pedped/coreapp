@@ -13,20 +13,17 @@
                         <a href="#" class="fa fa-times"></a>
                     </div>
 
-                    <h2 class="panel-title">Website Footer Text</h2>
+                    <h2 class="panel-title">Website Info</h2>
                 </header>
                 <div class="panel-body">
 
-                    <p>Change website footer name here</p>
+                    <p>You can change website info here</p>
 
-                    <?php $siteInfoForm->renderDecorated("footertitle"); ?>
+                    <!-- Offline !-->
+                    <?php $siteInfoForm->renderDecorated("offline"); ?>
 
-                    <?php $siteInfoForm->renderDecorated("footertext"); ?>
-
-                    <?php $siteInfoForm->renderDecorated("footermenus"); ?>
-
-                    <?php $siteInfoForm->renderDecorated("footerenablecontact"); ?>
-
+                    <!-- Offline Message !-->
+                    <?php $siteInfoForm->renderDecorated("offlinemessage"); ?>
 
                     <!-- Submit Button !-->
                     <br/>

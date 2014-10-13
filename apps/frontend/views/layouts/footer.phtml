@@ -4,36 +4,34 @@
             <div class="row">
                 <!-- Contact Us !-->
                 <div class="col-md-4">
-                    <h3 class="head">What our client says</h3>
+                    <h3 class="head"><?php echo $websiteSettings->footertitle; ?></h3>
                     <p class="about-description">
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                        <?php echo $websiteSettings->footertext; ?>
                     </p>
                 </div>
                 <!-- Links !-->
                 <div class="col-md-4">
                     <h3 class="head">Useful Links</h3>
                     <ul>
-                        <li><a class="link-item" href="http://localhost/about/academy">About</a></li>
-                        <li><a class="link-item" href="http://localhost/bootique/program">Program</a></li>
-                        <li><a class="link-item" href="http://localhost/bootique/gallery">Gallery</a></li>
-                        <li><a class="link-item" href="http://localhost/bootique/services">Services</a></li>
-                        <li><a class="link-item" href="http://localhost/bootique/location">Contact Us</a></li>
+                        <?php echo $websiteSettings->footermenus; ?>
                     </ul>
                 </div>
-                <!-- About Us !-->
-                <div class="col-md-4">
-                    <form>
-                        <h3 class="head">Contact Us</h3>
-                        <p>Use this form to contact us</p>
-                        <input type="text" name="name" placeholder="Name" class="form-control">
-                        <br>
-                        <input type="text" name="email" placeholder="Email" class="form-control">
-                        <br>
-                        <textarea type="text" name="message" placeholder="Type your messages here" class="form-control"></textarea>
-                        <br>
-                        <input type="submit" name="sendcount" value="Send" class="btn btn-bootique">
-                    </form>
-                </div>
+                <?php if ((bool) $websiteSettings->footerenablecontact) : ?>
+                    <!-- About Us !-->
+                    <div class="col-md-4">
+                        <form>
+                            <h3 class="head">Contact Us</h3>
+                            <p>Use this form to contact us</p>
+                            <input type="text" name="name" placeholder="Name" class="form-control">
+                            <br>
+                            <input type="text" name="email" placeholder="Email" class="form-control">
+                            <br>
+                            <textarea type="text" name="message" placeholder="Type your messages here" class="form-control"></textarea>
+                            <br>
+                            <input type="submit" name="sendcount" value="Send" class="btn btn-bootique">
+                        </form>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>   

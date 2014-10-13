@@ -50,6 +50,57 @@ class UserControllerBase extends ControllerBase {
 
     public function listAction($page = 1) {
 
+        // set page title
+        $this->setTitle("Most Active Users");
+
+        // check if we have to search
+        if ($this->request->isPost() && $this->request->hasPost("target")) {
+
+            $parameters = array();
+            $target = $this->request->getPost("target");
+            $query = $this->request->getPost("searchquery");
+            $parameters["conditions"] = "$target LIKE '%$query%' ";
+            $parameters["order"] = "logintimes DESC";
+            $this->persistent->parameters = $parameters;
+        } else {
+            //$parameters = array();
+            //$this->persistent->parameters = $parameters;
+        }
+
+
+        $parameters = $this->persistent->parameters;
+        if (!is_array($parameters)) {
+            $parameters = array();
+        } else {
+            //var_dump($parameters);
+            //die();
+        }
+
+
+        // load the users
+        $users = BaseUser::find($parameters);
+
+
+        $numberPage = $page;
+
+        // create paginator
+        $paginator = new AtaPaginator(array(
+            "data" => $users,
+            "limit" => 10,
+            "page" => $numberPage
+        ));
+
+
+        $paginator->setSearchItemArrays(array(
+            "userid" => "User ID",
+            "email" => "Email"
+        ));
+
+        $this->view->users = $paginator->getPaginate();
+    }
+
+    public function mostAction($page = 1) {
+
 
         // check if we have to search
         if ($this->request->isPost() && $this->request->hasPost("target")) {

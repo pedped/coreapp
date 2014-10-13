@@ -6,6 +6,17 @@
  */
 class PieChartElement extends BaseElement {
 
+    
+     public function __construct($name, $attributes = null) {
+        parent::__construct($name, $attributes);
+
+        // we have to add the javascript and css for the item
+        $this->setScriptnames(array(
+            "js/highchart/js/highcharts.js"
+        ));
+    }
+    
+    
     private $title = "[TITLE]";
     private $seriesName = "[SERIES NAME]";
     private $values = array(
