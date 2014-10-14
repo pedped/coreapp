@@ -8,7 +8,7 @@ use Phalcon\Mvc\Controller;
 use Simpledom\Core\AtaModel;
 use Simpledom\Core\Classes\Config;
 
-class BaseUser extends AtaModel {
+class BaseUser extends AtaModel implements Searchable {
 
     public function getSource() {
         return "user";
@@ -320,7 +320,12 @@ class BaseUser extends AtaModel {
         $this->verifycode = $this->generateRandomString(256);
         $this->resetcode = "0";
         $this->resetcodedate = "0";
+        $this->fullname = $this->fname . " " . $this->lname;
         $this->regtime = date(time());
+    }
+
+    public function beforeValidationOnSave() {
+        $this->fullname = $this->fname . " " . $this->lname;
     }
 
     public function beforeCreate() {
@@ -479,6 +484,39 @@ AND MONTH(user.regtime) >= MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY day(u
         $newpasshash = md5($newpass);
         $this->password = $newpasshash;
         return $this->save();
+    }
+
+    /**
+     * 
+     * @param type $query
+     * @param type $start
+     * @param type $limit
+     * @param type $foundedCount
+     * @param type $results
+     * @param type $viewName
+     * @return SearchResult
+     */
+    public static function RequestSearch($query, $start, $limit, &$foundedCount = -1, &$results = array(), &$viewName = "default") {
+        
+        $users = BaseUser::find(array(
+                    "fullname LIKE '%$query%'",
+                    "limit" => "$start , $limit",
+        ));
+
+        $total = BaseUser::count(array(
+                    "fullname LIKE '%$query%'",
+        ));
+
+        $foundedCount = $total;
+        $results = $users;
+
+        $result = new SearchResult();
+        $result->query = $query;
+        $result->count = $total;
+        $result->items = $results;
+        $result->start = $start;
+        $result->limit = $limit;
+        return $result;
     }
 
 }
