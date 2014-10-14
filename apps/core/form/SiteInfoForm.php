@@ -2,11 +2,13 @@
 
 namespace Simpledom\Core;
 
+use EnableDisableElement;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
 use Simpledom\Admin\BaseControllers\ControllerBase;
+use TextAreaElement;
 use TextElement;
 
 class SiteInfoForm extends AtaForm {
@@ -27,13 +29,46 @@ class SiteInfoForm extends AtaForm {
         )));
         $this->add($websitename);
 
+
+
+        // Enable Disable Signup
+        $enabledisablesignup = new EnableDisableElement("enabledisablesignup");
+        $enabledisablesignup->setLabel("Enable\Disable Signup");
+        $enabledisablesignup->setAttribute("placeholder", "");
+        $enabledisablesignup->setAttribute("class", "form-control");
+        $this->add($enabledisablesignup);
+
+
+        // Enable Disable Signin
+        $enabledisablesiginin = new EnableDisableElement("enabledisablesignin");
+        $enabledisablesiginin->setLabel("Enable\Disable Login");
+        $enabledisablesiginin->setAttribute("placeholder", "");
+        $enabledisablesiginin->setAttribute("class", "form-control");
+        $this->add($enabledisablesiginin);
+
+
+
         // Website Logo
         // Metadata
-        $metedata = new \TextAreaElement("metadata");
+        $metedata = new TextAreaElement("metadata");
         $metedata->setLabel("Metadata");
         $metedata->setAttribute("placeholder", "");
         $metedata->setAttribute("class", "form-control");
         $this->add($metedata);
+
+        // Google Analytics
+        $googleanalytics = new TextAreaElement("googlea");
+        $googleanalytics->setLabel("Google Analytics Code");
+        $googleanalytics->setAttribute("placeholder", "");
+        $googleanalytics->setAttribute("class", "form-control");
+        $this->add($googleanalytics);
+
+        // Clicky Analytics
+        $clicyanalytics = new TextAreaElement("clickya");
+        $clicyanalytics->setLabel("Clicky Analytics Code");
+        $clicyanalytics->setAttribute("placeholder", "");
+        $clicyanalytics->setAttribute("class", "form-control");
+        $this->add($clicyanalytics);
 
 
         // Keywords

@@ -10,6 +10,7 @@ use LoginDetailsForm;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use ProfileImageForm;
+use Settings;
 use Simpledom\Core\Classes\FileManager;
 use Simpledom\Core\ForgetPasswordForm;
 use Simpledom\Core\LoginForm;
@@ -65,7 +66,6 @@ class UserController extends ControllerBase {
         // load the users
         $users = BaseUser::find();
 
-
         $numberPage = $page;
 
         // create paginator
@@ -78,21 +78,37 @@ class UserController extends ControllerBase {
     }
 
     public function loginAction() {
+
+
         $lf = new LoginForm();
         $this->view->loginform = $lf;
         if ($this->request->isPost()) {
             if (!$lf->isValid($_POST)) {
                 // invalid post
             } else {
+
+                // check if the website signin is enabled
+
                 $email = $this->request->getPost("email");
                 $password = $this->request->getPost("password");
                 $user = BaseUser::Login($email, $password);
                 if ($user) {
+
+                    // check if the login is enabled
+                    if (!$user->isSuperAdmin() && (bool) Settings::Get()->enabledisablesignin == false) {
+                        $this->flash->notice("Sorry!<br/>The login is disabled by adminstrator now");
+                        return;
+                    }
+
                     // set session
                     $user->setSession($this);
 
                     // set login for the user
                     $user->trackLogin($this->request->getUserAgent(), $_SERVER["REMOTE_ADDR"]);
+
+                    // incrase loggin time
+                    $user->logintimes = $user->logintimes + 1;
+                    $user->save();
 
                     // we need to log this action for the user
                     BaseUserLog::byUserID($user->userid)->setAction("Login To System")->Create();
@@ -122,6 +138,15 @@ class UserController extends ControllerBase {
             if (!$rf->isValid($_POST)) {
                 // invalid post
             } else {
+
+
+                // check if the login is enabled
+                if (!$user->isSuperAdmin() && (bool) Settings::Get()->enabledisablesignup == false) {
+                    $this->flash->notice("Sorry!<br/>But the register system is disabled by Super Adminstator at this time.");
+                    return;
+                }
+
+
                 // valid post, we have to create new user based on the request
                 $user = new BaseUser();
                 $user->fname = $this->request->getPost("firstname");

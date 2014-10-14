@@ -120,4 +120,41 @@ abstract class ControllerBase extends AtaController {
         }
     }
 
+    /**
+     * this function will handle form scripts
+     * @param AtaForm $fr
+     */
+    public function handleFormScripts($fr) {
+
+        $loadedScripts = array();
+        foreach ($fr->getElements() as $element) {
+            try {
+                if (method_exists($element, "getScriptnames")) {
+
+                    // load internal scripts
+                    $scripts = $element->getScriptnames();
+                    foreach ($scripts as $scriptname) {
+                        if (!isset($loadedScripts[$scriptname])) {
+                            $loadedScripts[$scriptname] = $scriptname;
+                            $this->assets
+                                    ->collection('elementscripts')->addJs($scriptname, true);
+                        }
+                    }
+
+
+                    $externalscripts = $element->getExternalScriptNames();
+                    foreach ($externalscripts as $scriptname) {
+                        if (!isset($loadedScripts[$scriptname])) {
+                            $loadedScripts[$scriptname] = $scriptname;
+                            $this->assets
+                                    ->collection('externalscripts')->addJs($scriptname, true);
+                        }
+                    }
+                }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
+    }
+
 }

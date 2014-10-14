@@ -8,7 +8,7 @@ use Phalcon\Tag; ?>
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,700' rel='stylesheet' type='text/css'>
         <?php $this->assets->outputCss('header') ?>
         <?php $this->assets->outputJs('footer') ?>
-        
+
         <?php $this->assets->outputJs('externalscripts') ?>
         <?php $this->assets->outputJs('elementscripts') ?>
         <?php echo Tag::getTitle() ?>
@@ -18,9 +18,18 @@ use Phalcon\Tag; ?>
     <body>
         <div class="container-fluid">
             <div class="col-md-12" style="text-align: left;">
-                <?php echo $this->getContent() ?>
+                <?php echo $this->getContent(); ?>
             </div>
         </div>
         <?php $this->partial("layouts/footer") ?>
+        <?php
+        if (isset($websiteSettings->googleanalytics) && strlen($websiteSettings->googleanalytics) > 0) {
+            echo $websiteSettings->googleanalytics;
+        }
+
+        if (isset($websiteSettings->clickyanalitics) && strlen($websiteSettings->clickyanalitics) > 0) {
+            echo $websiteSettings->googleanalytics;
+        }
+        ?>
     </body>
 </html>

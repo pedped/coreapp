@@ -363,9 +363,6 @@ class BaseUser extends AtaModel implements Searchable {
                 // valid password, we have to generate token for the request
                 $user->generateToken();
 
-                // incrase loggin time
-                $user->logintimes = $user->logintimes + 1;
-                $user->save();
                 // load the user
                 return $user;
             } else {

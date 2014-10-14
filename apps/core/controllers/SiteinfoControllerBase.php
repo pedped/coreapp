@@ -31,6 +31,10 @@ class SiteinfoControllerBase extends ControllerBase {
                 $settings->metadata = $this->request->getPost("metadata");
                 $settings->latitude = $this->request->getPost("latitude");
                 $settings->longtude = $this->request->getPost("longtude");
+                $settings->enabledisablesignup = $this->request->getPost("enabledisablesignup");
+                $settings->enabledisablesignin = $this->request->getPost("enabledisablesignin");
+                $settings->googleanalytics = $this->request->getPost("googlea");
+                $settings->clickyanalitics = $this->request->getPost("clickya");
                 if (!$settings->save()) {
                     $settings->showErrorMessages($this);
                 } else {
@@ -49,6 +53,10 @@ class SiteinfoControllerBase extends ControllerBase {
         $fr->get("metadata")->setDefault($settings->metadata);
         $fr->get("latitude")->setDefault($settings->latitude);
         $fr->get("longtude")->setDefault($settings->longtude);
+        $fr->get("enabledisablesignin")->setDefault($settings->enabledisablesignin);
+        $fr->get("enabledisablesignup")->setDefault($settings->enabledisablesignup);
+        $fr->get("googlea")->setDefault($settings->googleanalytics);
+        $fr->get("clickya")->setDefault($settings->clickyanalitics);
 
         $this->view->siteInfoForm = $fr;
     }

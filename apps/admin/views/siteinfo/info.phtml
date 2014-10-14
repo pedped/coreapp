@@ -6,7 +6,7 @@
 <form method="post">
     <div class="row">
         <div class="col-lg-12">
-            <section class="panel">
+            <section class="panel panel-success">
                 <header class="panel-heading">
                     <div class="panel-actions">
                         <a href="#" class="fa fa-caret-down"></a>
@@ -22,6 +22,12 @@
                     <!-- Website Name !-->
                     <?php $siteInfoForm->renderDecorated("websitename"); ?>
 
+                    <!-- Enable\Disable Signup Mode!-->
+                    <?php $siteInfoForm->renderDecorated("enabledisablesignup"); ?>
+
+                    <!-- Enable\Disable Signin Mode!-->
+                    <?php $siteInfoForm->renderDecorated("enabledisablesignin"); ?>
+
 
                     <!-- Submit Button !-->
                     <br/>
@@ -33,7 +39,7 @@
     <!-- SEO !-->
     <div class="row">
         <div class="col-lg-12">
-            <section class="panel">
+            <section class="panel panel-info">
                 <header class="panel-heading">
                     <div class="panel-actions">
                         <a href="#" class="fa fa-caret-down"></a>
@@ -62,7 +68,7 @@
     <!-- Location !-->
     <div class="row">
         <div class="col-lg-12">
-            <section class="panel">
+            <section class="panel panel-primary">
                 <header class="panel-heading">
                     <div class="panel-actions">
                         <a href="#" class="fa fa-caret-down"></a>
@@ -89,6 +95,35 @@
                     <!-- longtude !-->
                     <?php $siteInfoForm->renderDecorated("longtude"); ?>
 
+
+                    <!-- Submit Button !-->
+                    <br/>
+                    <?php $siteInfoForm->renderDecorated("submit"); ?>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel panel-dark">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+
+                    <h2 class="panel-title">Analytics</h2>
+                </header>
+                <div class="panel-body">
+
+                    <p>You may add your Website analytics code to this system</p>
+
+                    <!-- Clicky Analytics!-->
+                    <?php $siteInfoForm->renderDecorated("clickya"); ?>
+
+                    <!-- Google Analytics!-->
+                    <?php $siteInfoForm->renderDecorated("googlea"); ?>
 
                     <!-- Submit Button !-->
                     <br/>

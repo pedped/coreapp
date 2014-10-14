@@ -93,6 +93,30 @@ class BaseSettings extends AtaModel {
     public $offlinemessage;
 
     /**
+     *
+     * @var string
+     */
+    public $enabledisablesignup;
+
+    /**
+     *
+     * @var string
+     */
+    public $enabledisablesignin;
+
+    /**
+     *
+     * @var string
+     */
+    public $googleanalytics;
+
+    /**
+     *
+     * @var string
+     */
+    public $clickyanalitics;
+
+    /**
      * 
      * @param type $parameters
      * @return BaseSettings
