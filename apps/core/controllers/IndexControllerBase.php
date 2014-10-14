@@ -4,6 +4,7 @@ namespace Simpledom\Admin\BaseControllers;
 
 use BaseContact;
 use BaseUser;
+use Opinion;
 
 class IndexControllerBase extends ControllerBase {
 
@@ -15,6 +16,7 @@ class IndexControllerBase extends ControllerBase {
 
         // load total contacts
         $this->view->totalUsers = BaseUser::count();
+        $this->view->totalOpinions = Opinion::count();
         $this->view->totalContacts = BaseContact::count();
         $user = new BaseUser();
         $this->view->registerChart = $user->getLastMonthRegistarChart();
