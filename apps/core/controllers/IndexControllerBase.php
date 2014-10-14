@@ -5,6 +5,8 @@ namespace Simpledom\Admin\BaseControllers;
 use BaseContact;
 use BaseUser;
 use Opinion;
+use Simpledom\Core\SendSMSForm;
+use SMSManager;
 
 class IndexControllerBase extends ControllerBase {
 
@@ -20,6 +22,30 @@ class IndexControllerBase extends ControllerBase {
         $this->view->totalContacts = BaseContact::count();
         $user = new BaseUser();
         $this->view->registerChart = $user->getLastMonthRegistarChart();
+    }
+
+    public function sendsmsaction() {
+        $fr = new SendSMSForm();
+        if ($this->request->isPost()) {
+            if (!$fr->isValid($_POST)) {
+                // invalid request
+            } else {
+                $phones = explode(",", $this->request->getPost("phones", "string"));
+                $message = $this->request->getPost("message");
+                $numberID = $this->request->getPost("fromnumber");
+
+                // Send SMSs
+                $result = SMSManager::SendSMS($phones, $message, $numberID);
+
+                // check if we have successfully sent messages
+                if ($result) {
+                    $this->flash->success("Your message has been sent successfully to thsi numberss<br/><br/>" . implode("<br/>", $phones));
+                } else {
+                    $this->flash->error("There was a problem in sending message");
+                }
+            }
+        }
+        $this->view->form = $fr;
     }
 
     protected function ValidateAccess($id) {

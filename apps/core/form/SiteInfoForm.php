@@ -7,9 +7,11 @@ use Phalcon\Forms\Element\Submit;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
-use Simpledom\Admin\BaseControllers\ControllerBase;
+use Simpledom\Frontend\Controllers\ControllerBase;
 use TextAreaElement;
 use TextElement;
+
+
 
 class SiteInfoForm extends AtaForm {
 

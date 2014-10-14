@@ -70,6 +70,8 @@ class Module implements ModuleDefinitionInterface {
                     __DIR__ . '\\controllers\\',
                     __DIR__ . '\\forms\\',
                     dirname(__DIR__) . '\\core\\',
+                    dirname(__DIR__) . '\\core\\class\\',
+                    dirname(__DIR__) . '\\core\\class\\smsproviders\\',
                     dirname(__DIR__) . '\\core\\element\\',
                     dirname(__DIR__) . '\\core\\interfaces\\',
                     dirname(__DIR__) . '\\core\\controllers\\',

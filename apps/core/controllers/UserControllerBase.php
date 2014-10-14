@@ -51,7 +51,7 @@ class UserControllerBase extends ControllerBase {
     public function listAction($page = 1) {
 
         // set page title
-        $this->setTitle("Most Active Users");
+        $this->setTitle("Users");
 
         // check if we have to search
         if ($this->request->isPost() && $this->request->hasPost("target")) {

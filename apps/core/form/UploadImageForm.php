@@ -1,11 +1,10 @@
 <?php
 
-namespace Simpledom\Core;
-
-use Phalcon\Forms\Element\File;
 use Phalcon\Forms\Element\Submit;
-use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Logger\Adapter\File;
 use Simpledom\Core\AtaForm;
+
+namespace Simpledom\Core;
 
 class UploadImageForm extends AtaForm {
 

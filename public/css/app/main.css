@@ -140,3 +140,13 @@ footer .btn {
     border-color: #f00;
     font-size: 120%;
 }
+
+.page-opinion ._opinion-item{
+
+}
+.page-opinion ._opinion-item ._name{
+    margin-bottom: 0px;
+}
+.page-opinion ._opinion-item ._date{
+    font-size: 80%;
+}
