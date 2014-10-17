@@ -1,9 +1,7 @@
 <?php
+namespace Simpledom\Models;
 
-                        class UserTransaction extends BaseUserTransaction {
-
-
-                        }
-
-
-                            
+use BaseUserTransaction;
+class UserTransaction extends BaseUserTransaction {
+    
+}

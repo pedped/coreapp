@@ -1,9 +1,9 @@
 <?php
 
-                        class PaymentType extends BasePaymentType {
+namespace Simpledom\Models;
 
+use BasePaymentType;
 
-                        }
-
-
-                            
+class PaymentType extends BasePaymentType {
+    
+}

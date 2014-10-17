@@ -1,9 +1,8 @@
 <?php
+namespace Simpledom\Models;
 
-                        class ProductType extends BaseProductType {
+use BaseProductType;
 
-
-                        }
-
-
-                            
+class ProductType extends BaseProductType {
+    
+}
