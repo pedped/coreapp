@@ -45,8 +45,6 @@ class UserCachChangeForm extends AtaForm {
         $date->setLabel('Date');
         //$date->setAttribute('placeholder', 'Enter your Date');
         $date->setAttribute('class', 'form-control');
-        $date->addValidator(new PresenceOf(array(
-        )));
         $this->add($date);
 
 

@@ -37,4 +37,8 @@ class Config {
         return "http://localhost/simpledom/";
     }
 
+    public static function GetPaylineAPI() {
+        // TODO fix it here
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Simpledom\Core;
 
+use EnableDisableElement;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Validation\Validator\PresenceOf;
 use Simpledom\Core\AtaForm;
@@ -41,7 +42,7 @@ class ProductTypeForm extends AtaForm {
 
 
         // Enable
-        $enable = new TextElement('enable');
+        $enable = new EnableDisableElement('enable');
         $enable->setLabel('Enable');
         //$enable->setAttribute('placeholder', 'Enter your Enable');
         $enable->setAttribute('class', 'form-control');

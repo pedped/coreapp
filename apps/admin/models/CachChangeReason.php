@@ -1,9 +1,5 @@
 <?php
 
-                        class CachChangeReason extends BaseCachChangeReason {
-
-
-                        }
-
-
-                            
+class CachChangeReason extends BaseCachChangeReason {
+    
+}

@@ -1,9 +1,5 @@
 <?php
 
-                        class UserCachChange extends BaseUserCachChange {
-
-
-                        }
-
-
-                            
+class UserCachChange extends BaseUserCachChange {
+    
+}

@@ -1,96 +1,91 @@
 <?php
 
-                        use Phalcon\Mvc\Model\Validator\Email as Email;
-                        use Simpledom\Core\AtaModel;
+use Simpledom\Core\AtaModel;
 
-                        class BaseCachChangeReason extends AtaModel {
+class BaseCachChangeReason extends AtaModel {
 
-                            public function getSource() {
-                                return 'cachchangereason';
-                            } 
-                            /**
-                             * ID
-                             * @var string
-                             */
-                            public $id;
+    public function getSource() {
+        return 'cachchangereason';
+    }
 
-                        /**
-                         * Set ID
-                         * @param type $id
-                         * @return BaseCachChangeReason
-                         */
-                       public function setId($id) {
-                            $this->id = $id;
-                            return $this;
-                       } 
-                     
-                            /**
-                             * Name
-                             * @var string
-                             */
-                            public $name;
+    /**
+     * ID
+     * @var string
+     */
+    public $id;
 
-                        /**
-                         * Set Name
-                         * @param type $name
-                         * @return BaseCachChangeReason
-                         */
-                       public function setName($name) {
-                            $this->name = $name;
-                            return $this;
-                       } 
-                     
-                            /**
-                             * Description
-                             * @var string
-                             */
-                            public $description;
+    /**
+     * Set ID
+     * @param type $id
+     * @return BaseCachChangeReason
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
 
-                        /**
-                         * Set Description
-                         * @param type $description
-                         * @return BaseCachChangeReason
-                         */
-                       public function setDescription($description) {
-                            $this->description = $description;
-                            return $this;
-                       } 
-                     
-                            /**
-                             * Date
-                             * @var string
-                             */
-                            public $date;
+    /**
+     * Name
+     * @var string
+     */
+    public $name;
 
-                        /**
-                         * Set Date
-                         * @param type $date
-                         * @return BaseCachChangeReason
-                         */
-                       public function setDate($date) {
-                            $this->date = $date;
-                            return $this;
-                       } 
-                    
-                            public function getDate() {
-                                return date('Y-m-d H:m:s', $this->date);
-                            }
+    /**
+     * Set Name
+     * @param type $name
+     * @return BaseCachChangeReason
+     */
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
 
-                            public function beforeValidationOnCreate() {
-                                 $this->date = time();
-                            }
+    /**
+     * Description
+     * @var string
+     */
+    public $description;
 
+    /**
+     * Set Description
+     * @param type $description
+     * @return BaseCachChangeReason
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
+    }
 
-                            public function beforeValidationOnSave() {
-                               
+    /**
+     * Date
+     * @var string
+     */
+    public $date;
+
+    /**
+     * Set Date
+     * @param type $date
+     * @return BaseCachChangeReason
+     */
+    public function setDate($date) {
+        $this->date = $date;
+        return $this;
+    }
+
+    public function getDate() {
+        return date('Y-m-d H:m:s', $this->date);
+    }
+
+    public function beforeValidationOnCreate() {
+        $this->date = time();
+    }
+
+    public function beforeValidationOnSave() {
         
-                            }
+    }
 
-                            public function getPublicResponse() {
+    public function getPublicResponse() {
         
-                            }
+    }
 
-                        }
-
-
-                            
+}
