@@ -7,8 +7,9 @@ use BaseUser;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Url;
 use Phalcon\Tag;
-use Settings;
+use Phalcon\Validation\Exception;
 use Simpledom\Core\AtaForm;
+use Simpledom\Models\Settings;
 
 class ControllerBase extends Controller {
 
