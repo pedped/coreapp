@@ -1,9 +1,5 @@
 <?php
 
-                        class TransactionType extends BaseTransactionType {
-
-
-                        }
-
-
-                            
+class TransactionType extends BaseTransactionType {
+    
+}

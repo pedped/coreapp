@@ -2,6 +2,8 @@
 
 abstract class PaymentMethod {
 
+    protected $paymentMethodName;
+
     public abstract function OnFinishPayment();
 
     public abstract function CheckPayed($paymentID);
@@ -12,7 +14,7 @@ abstract class PaymentMethod {
 
     protected abstract function SetPayed(&$errors);
 
-    public abstract function StartPayment(&$errors, $paymentID, $amount, $currency);
+    public function RequestStartPayment(&$errors, $userid, $paymentID, $amount, $currency);
 
     public abstract function GetPaymentInfo($paymentitemid);
 
@@ -38,6 +40,41 @@ abstract class PaymentMethod {
                 die("getPaymentInfo implanted");
                 break;
         }
+    }
+
+    /**
+     * this function will start payment
+     * @param type $errors
+     * @param type $paymentID
+     * @param type $amount
+     * @param type $currency
+     * @return type
+     */
+    public function StartPayment(&$errors, $userid, $amount, $currency, $transactionID, $orderID = null) {
+
+        $paymentID = $this->CreatePayment(&$errors, $userid, $amount, $currency, $transactionID);
+
+        // check if this payment is for the order, set the payment info for order
+        if (isset($orderID) && intval($orderID) > 0) {
+            // it is for order id
+            $order = new Order($userid);
+            $paymentType = $this->getPaymentTypeID();
+            $order->UpdateOrderPaymentInfo($errors, $orderID, $userid, $paymentType, $paymentID);
+
+            // check if we have no erorrs
+            if (count($errors) > 0) {
+                // we have sme problems
+                //var_dump($errors);
+                return;
+            }
+        }
+
+        // we have to start the payment
+        $this->RequestStartPayment($errors, $userid, $paymentID, $amount, $currency);
+    }
+
+    public function getPaymentTypeID() {
+        return PaymentType::findFirst($this->paymentMethodName)->id;
     }
 
 }

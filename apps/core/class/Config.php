@@ -41,4 +41,8 @@ class Config {
         // TODO fix it here
     }
 
+    public static function GetHomeUrl() {
+        return "http://localhost/simpledom/";
+    }
+
 }

@@ -1,73 +1,175 @@
 <?php
 
 use Simpledom\Core\Classes\Config;
+use Simpledom\Core\Classes\Helper;
 
 class PaymentHandlerPayline extends PaymentMethod {
 
+    protected $paymentMethodName = "payline";
+
+    /**
+     * Check if the payment was payed before, this function will check from database, not payment server
+     * @param type $paymentID
+     * @return boolean
+     */
     public function CheckPayed($paymentID) {
-        
+        return PaymentPayline::findFirst($paymentID)->done == 1;
     }
 
-    public function CreatePayment($amount, $currency, $userTransactionID) {
-        
+    /**
+     * Create New Payline Payment Raw In Database And Return the ID
+     * @param int $userid
+     * @param float $amount
+     * @param string $currency
+     * @param int $userTransactionID
+     * @return int Payline Payment ID
+     */
+    public function CreatePayment(&$errors, $userid, $amount, $currency, $userTransactionID) {
+        $payment = new PaymentPayline();
+        $payment->userid = $userid;
+        $payment->amount = $amount;
+        $payment->cur = $currency;
+        $payment->usertransactionid = $userTransactionID;
+        if (!$payment->create()) {
+            $errors[] = _("Unable to create new payment");
+            $errors = array_merge($errors, $payment->getMessages());
+            return false;
+        }
+
+        // payment created successfully
+        return $payment->id;
     }
 
-    public function GetPaymentInfo($paymentitemid) {
-        
+    public function GetPaymentInfo($paymentID) {
+        return PaymentPayline::findFirst($paymentID);
     }
 
+    /**
+     * this function will call when we have recived finish url
+     * @param type $errors
+     * @param type $parameters
+     * @return boolean
+     */
     public function OnFinishPayment(&$errors, $parameters) {
 
         //Get Inputs
         $paylineTransactionID = $parameters['trans_id'];
         $paylineGetID = $parameters['id_get'];
         $paylinePaylineID = $parameters['pid'];
+        $userid = $parameters['userid'];
 
         // Add Payline Function
-        if (!$this->SetPayed($errors, $paylineTransactionID, $paylineGetID, $paylinePaylineID)) {
+        if (!$this->SetPayed($errors, $paylineTransactionID, $paylineGetID, $paylinePaylineID, $userid)) {
             $errors = _("Unable to finish payment");
             return false;
         }
 
 
         // payment method set to done, check if this payment was belong to a order
-        require_once '../core/class.order.php';
-        $o = new Order($_SESSION["uid"]);
-        $paymentType = __ORDERPAYMENTTYPE_PAYLINE;
-        $o->OnSuccessPayment($errors, $paymentType, $paylinePaylineID);
-
-
-        // the payment may be for the increase cach. check for it
-        if (Config::DebugMode()) {
-            var_dump($errors);
-        }
+        $order = new Order($_SESSION["uid"]);
+        $paymentTypeID = $this->getPaymentTypeID();
+        $order->OnSuccessPayment($errors, $paymentTypeID, $paylinePaylineID);
     }
 
+    /**
+     * this function will Set Payment As Payed Payment
+     * Parameters Are :
+     * 
+     *  $paylineTransactionID
+     *  $paylineIDGet
+     *  $paylinePaymentID
+     *  $userid
+     *  
+     * @param type $errors
+     * @return boolean
+     */
     protected function SetPayed(&$errors) {
 
         $paylineTransactionID = func_get_arg(1);
         $paylineIDGet = func_get_arg(2);
         $paylinePaymentID = func_get_arg(3);
+        $userid = func_get_arg(4);
 
         // we have to check if user really payed the price
         if (!$this->VerifyValidPayment($errors, $paylineTransactionID, $paylineIDGet) || !$this->VerifyPaylineIDGetAndPaylineID($paylinePaymentID, $paylineIDGet)) {
             $errors[] = _("Can not validate your payment");
-            return;
+            return false;
         }
         // Set Payed
-        $done = Mobile_PaylinePaymentSetDone($this->userid, $paylineTransactionID, $paylineIDGet);
-        if ($done == false) {
-            $errors[] = _("Can not update database info, may be you have payed this order before or you are not authorzed to access this payment");
+        $payment = PaymentPayline::findFirst("paylineidget = '$paylineIDGet'");
+        if ($payment->userid != $userid) {
+            // invalid userid
+            $errors[] = _("Invalid User ID");
             return false;
-        } else {
-            return $done;
+        }
+
+        $payment->paylinetransactionid = $paylineTransactionID;
+        $payment->done = 1;
+        if (!$payment->save()) {
+            // unable to save the payment
+            $errors[] = _("Can not update database info, may be you have payed this order before or you are not authorzed to access this payment");
+            $errors = array_merge($errors, $payment->getMessages());
+            return false;
         }
     }
 
-    public function StartPayment(&$errors, $paymentID, $amount, $currency) {
-        
+    public function RequestStartPayment(&$errors, $userid, $paymentID, $amount, $currency) {
+
+        function send($url, $api, $amount, $redirect) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "api=$api&amount=$amount&redirect=$redirect");
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $res = curl_exec($ch);
+            curl_close($ch);
+            return $res;
+        }
+
+        $url = 'http://payline.ir/payment-test/gateway-send';
+        $api = Config::GetPaylineAPI();
+        $amount = filter_var($amount, FILTER_VALIDATE_INT);
+        $redirect = urlencode(Config::GetHomeUrl() . '/payment/finish/payline/' . $paymentID . "");
+        $paylineGetID = send($url, $api, $amount, $redirect);
+        if ($paylineGetID > 0 && is_numeric($paylineGetID)) {
+
+            $payment = PaymentPayline::findFirst($paymentID);
+            if (intval($payment->userid) != intval($userid)) {
+                $errors[] = _("Invalid User ID");
+                return;
+            }
+            $payment->paylineidget = $paylineGetID;
+            if (!$payment->save()) {
+                $errors[] = _("Unable to store payment info in database");
+                return;
+            }
+
+            $url = "http://payline.ir/payment-test/gateway-$paylineGetID";
+            Helper::RedirectToURL($url);
+            return;
+        }
+
+        switch ($paylineGetID) {
+            case '-1':
+                $errors[] = _("invalid API");
+                break;
+            case '-2':
+                $errors[] = _("amount is lower than 1000 rials");
+                break;
+            case '-3':
+                $errors[] = _("invalid redirect url");
+                break;
+            case '-4':
+                $errors[] = _("can not find requested payment or waiting");
+                break;
+        }
     }
 
+    /**
+     * Check if the payment is really payed by user
+     * @param type $errors
+     * @return boolean
+     */
     public function VerifyValidPayment(&$errors) {
 
         $paylineTransactionID = func_get_arg(1);
@@ -116,10 +218,15 @@ class PaymentHandlerPayline extends PaymentMethod {
         return false;
     }
 
+    /**
+     * this function will check if the recived payment get id is equal to waht we have saved before
+     * @param type $paylinePaymentID
+     * @param type $paylineIDGet
+     * @return boolean
+     */
     public function VerifyPaylineIDGetAndPaylineID($paylinePaymentID, $paylineIDGet) {
-        
-        $mobile_PaylinePayment_GetPaymentGetID = Mobile_PaylinePayment_GetPaymentGetID($paylinePaymentID);
-        return intval($mobile_PaylinePayment_GetPaymentGetID) == intval($paylineIDGet);
+        $payment = PaymentPayline::findFirst($paylinePaymentID);
+        return intval($payment->paylineidget) == intval($paylineIDGet);
     }
 
 }

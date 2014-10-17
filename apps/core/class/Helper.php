@@ -2,6 +2,8 @@
 
 namespace Simpledom\Core\Classes;
 
+use Phalcon\Http\Response;
+
 class Helper {
 
     /**
@@ -21,6 +23,11 @@ class Helper {
         }
 
         return $bytes;
+    }
+
+    public static function RedirectToURL($url) {
+        $response = new Response();
+        $response->redirect($url);
     }
 
 }

@@ -172,8 +172,42 @@ class BaseUserOrder extends AtaModel {
         return date('Y-m-d H:m:s', $this->date);
     }
 
+    /**
+     * date
+     * @var string
+     */
+    public $done;
+
+    /**
+     * date
+     * @var string
+     */
+    public $donedate;
+
+    /**
+     * 
+     * @param type $done
+     * @return BaseUserOrder
+     */
+    public function setDone($done) {
+        $this->done = $done;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $donedate
+     * @return BaseUserOrder
+     */
+    public function setDonedate($donedate) {
+        $this->donedate = $donedate;
+        return $this;
+    }
+
     public function beforeValidationOnCreate() {
         $this->date = time();
+        $this->done = 0;
+        $this->donedate = 0;
     }
 
     public function beforeValidationOnSave() {
@@ -182,6 +216,15 @@ class BaseUserOrder extends AtaModel {
 
     public function getPublicResponse() {
         
+    }
+
+    /**
+     * 
+     * @param type $parameters
+     * @return UserOrder
+     */
+    public static function findFirst($parameters = null) {
+        return parent::findFirst($parameters);
     }
 
 }

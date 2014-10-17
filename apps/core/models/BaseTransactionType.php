@@ -1,76 +1,80 @@
 <?php
 
-                        use Phalcon\Mvc\Model\Validator\Email as Email;
-                        use Simpledom\Core\AtaModel;
+use Simpledom\Core\AtaModel;
 
-                        class BaseTransactionType extends AtaModel {
+class BaseTransactionType extends AtaModel {
 
-                            public function getSource() {
-                                return 'transactiontype';
-                            } 
-                            /**
-                             * ID
-                             * @var string
-                             */
-                            public $id;
+    public function getSource() {
+        return 'transactiontype';
+    }
 
-                        /**
-                         * Set ID
-                         * @param type $id
-                         * @return BaseTransactionType
-                         */
-                       public function setId($id) {
-                            $this->id = $id;
-                            return $this;
-                       } 
-                     
-                            /**
-                             * Key
-                             * @var string
-                             */
-                            public $key;
+    /**
+     * ID
+     * @var string
+     */
+    public $id;
 
-                        /**
-                         * Set Key
-                         * @param type $key
-                         * @return BaseTransactionType
-                         */
-                       public function setKey($key) {
-                            $this->key = $key;
-                            return $this;
-                       } 
-                     
-                            /**
-                             * Name
-                             * @var string
-                             */
-                            public $name;
+    /**
+     * Set ID
+     * @param type $id
+     * @return BaseTransactionType
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
 
-                        /**
-                         * Set Name
-                         * @param type $name
-                         * @return BaseTransactionType
-                         */
-                       public function setName($name) {
-                            $this->name = $name;
-                            return $this;
-                       } 
-                    
-                            public function beforeValidationOnCreate() {
-                                 
-                            }
+    /**
+     * Key
+     * @var string
+     */
+    public $key;
 
+    /**
+     * Set Key
+     * @param type $key
+     * @return BaseTransactionType
+     */
+    public function setKey($key) {
+        $this->key = $key;
+        return $this;
+    }
 
-                            public function beforeValidationOnSave() {
-                               
+    /**
+     * Name
+     * @var string
+     */
+    public $name;
+
+    /**
+     * Set Name
+     * @param type $name
+     * @return BaseTransactionType
+     */
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function beforeValidationOnCreate() {
         
-                            }
+    }
 
-                            public function getPublicResponse() {
+    public function beforeValidationOnSave() {
         
-                            }
+    }
 
-                        }
+    public function getPublicResponse() {
+        
+    }
 
+    /**
+     * 
+     * @param type $parameters
+     * @return TransactionType
+     */
+    public static function findFirst($parameters = null) {
+        return parent::findFirst($parameters);
+    }
 
-                            
+}

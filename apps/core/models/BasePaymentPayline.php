@@ -181,4 +181,21 @@ class BasePaymentPayline extends AtaModel {
         
     }
 
+    /**
+     * get the user behind this payment
+     * @return type
+     */
+    public function getUser() {
+        return BaseUser::findFirst($this->userid);
+    }
+
+    /**
+     * 
+     * @param type $parameters
+     * @return PaymentPayline
+     */
+    public static function findFirst($parameters = null) {
+        return parent::findFirst($parameters);
+    }
+
 }
