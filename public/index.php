@@ -6,7 +6,10 @@ use Phalcon\Exception;
 use Phalcon\Loader;
 use Phalcon\Mvc\Application;
 
-error_reporting(E_ALL);
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
+
 try {
 
     /**
@@ -48,10 +51,16 @@ try {
     $loader->registerDirs(
             array(
                 dirname(__DIR__) . "/apps/core/",
+                dirname(__DIR__) . "/apps/core/class/",
+                dirname(__DIR__) . "/apps/core/class/smsproviders/",
+                dirname(__DIR__) . "/apps/core/controllers/",
+                dirname(__DIR__) . "/apps/core/element/",
                 dirname(__DIR__) . "/apps/core/form/",
-                dirname(__DIR__) . "/apps/frontend/models/",
+                dirname(__DIR__) . "/apps/core/interfaces/",
                 dirname(__DIR__) . "/apps/core/models/",
+                dirname(__DIR__) . "/apps/admin/models/",
                 dirname(__DIR__) . "/apps/admin/forms/",
+                dirname(__DIR__) . "/apps/frontend/models/",
             )
     );
 

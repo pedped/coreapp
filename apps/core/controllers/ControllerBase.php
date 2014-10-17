@@ -43,19 +43,19 @@ abstract class ControllerBase extends AtaController {
         // CSS in the header
         $this->assets
                 ->collection('header')
-                ->setPrefix('http://localhost/simpledom/')
+                ->setPrefix('http://melk.edspace.org/')
                 ->addCss('css/bt3/bootstrap.css', true)
                 ->addCss('css/app/main.css', true);
 
         //Javascripts in the footer
         $this->assets
                 ->collection('footer')
-                ->setPrefix('http://localhost/simpledom/')
+                ->setPrefix('http://melk.edspace.org/')
                 ->addJs('js/jquery/jquery.min.js', true)
                 ->addJs('bootstrap/bootstrap.js', true);
 
 
-        $this->view->pfurl = "http://localhost/simpledom/";
+        $this->view->pfurl = "http://melk.edspace.org/";
 
         // set default page title
         $this->setTitle("Dashboard");

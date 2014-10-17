@@ -30,11 +30,11 @@ class Config {
     }
 
     public static function GetDefaultProfileLink($gender) {
-        return "http://localhost/simpledom/userupload/image/4MqyybZ94UNDsXsJ2M3FGmb8I9XmZ8X4.jpg";
+        return "http://melk.edspace.org/userupload/image/4MqyybZ94UNDsXsJ2M3FGmb8I9XmZ8X4.jpg";
     }
 
     public static function getPublicUrl() {
-        return "http://localhost/simpledom/";
+        return "http://melk.edspace.org/";
     }
 
 }
